@@ -3,5 +3,35 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+    script(type='text/javascript', src='https://code.jquery.com/jquery-2.1.4.min.js')
+    script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
   body
+    .container.main-container
+      .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+        .container
+          .navbar-header
+            button.navbar-toggle(data-toggle='collapse', data-target='.navbar-collapse')
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            p.navbar-text.subbrand ThoughtBnB
+          .navbar-collapse.collapse
+            ul.navbar-nav.nav.navbar-right
+              if user
+                li.active
+                  a(href='/') Home
+                li
+                  a(href='/members') Directory
+                li
+                  a(href='/map') Alumni Map
+                li
+                  a(href='/about') About
+                li
+                  a(href='/signout') Log Out
+              else
+                li.active
+                  a(href='/') Home
+                li
+                  a(href='/signin') Sign In
     block content
