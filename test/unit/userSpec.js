@@ -14,7 +14,7 @@ mongoose.connect(mongoUrl);
 var db = mongoose.connection;
 
 //Require User Module, passing mongoose
-var user = require("../../models/User")(mongoose);
+var user = require("../../models/user")(mongoose);
 
 var reqFields = [
   'name',
