@@ -1,0 +1,32 @@
+extends layout
+
+block content
+  .container
+    .page-header
+      h1 Sign Up!
+        small  or&nbsp;
+          a(href="/signin") Sign In
+    .row.row-fluid.form(style="max-width: 500px;")
+      .col-xs-12
+        p#formError.text-danger
+        .form-group
+          label(for="email").control-label Email address
+          input#email.form-control(name="email", type="email", placeholder="Enter email address")
+        .form-group
+          label(for="password").control-label Password
+          input#password.form-control(name="password", type="password", placeholder="Create a password")
+        .form-group
+          label(for="cpassword").control-label Confirm password
+          input#cpassword.form-control(name="cpassword", type="password", placeholder="Re-enter your password")
+        hr
+        .form-group
+          label(for="name").control-label Name
+          input#name.form-control(name="name", type="text", placeholder="Enter your name")
+        .form-group
+          label(for="phone").control-label Phone
+          input#phone.form-control(name="phone", type="text", placeholder="Enter your phone number")
+        hr
+        .form-group
+          button#btnSignup.btn.btn-success.btn-lg Sign up
+  script(type='text/javascript', src='/scripts/errors.js')
+  script(type='text/javascript', src='/scripts/signup.js')
