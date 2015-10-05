@@ -1,7 +1,7 @@
 var router = require('express').Router();
 
 var DB = require('../models/db');
-var User = require('../models/User')(DB.mongoose);
+var User = require('../models/user')(DB.mongoose);
 
 var respond = function(res, result) {
   res.contentType('application/json');
