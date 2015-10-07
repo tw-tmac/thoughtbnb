@@ -92,7 +92,8 @@ describe("User Module", function() {
       });
 
       describe("Required Fields", function() {
-        var fields = reqFields.filter(function(v) { return v !== "password"; });
+        var specialFields = ['email', 'password'];
+        var fields = reqFields.filter(function(v) { return specialFields.indexOf(v) === -1 });
         fields.map(function(field) {
           it("should save "+field, function(done) {
             bob[field] = "TestValue";
@@ -151,12 +152,20 @@ describe("User Module", function() {
       describe("Email", function() {
         it("should return an error if not unique", function(done) {
           var bob = newBob(true);
-          user.register(bob, function(resp) {
-            (resp.error === null).should.be.ok;
+          user.register(bob, function(response) {
+            (response.error === null).should.be.ok;
             user.register(bob, function(resp) {
               resp.error.should.equal(ERRORS.signup['email']['duplicate']);
               done();
             });
+          });
+        });
+        it("should reject an email address if it does not have the correct domain", function(done) {
+          var bob = newBob(true);
+          bob.email = "invalidemail" + (bobCount++) + "@invaliddomain.com",
+          user.register(bob, function(resp) {
+            resp.error.should.equal(ERRORS.signup['email']['domain'].replace('{{domain}}', CONFIG.EMAIL_DOMAIN));
+            done();
           });
         });
       });

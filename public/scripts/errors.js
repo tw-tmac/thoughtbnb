@@ -11,7 +11,8 @@ var ERRORS = (function() {
     },
     'email': {
       'name': "Email",
-      'duplicate': "The email address is already in use."
+      'duplicate': "The email address is already in use.",
+      'domain': "The email address must belong to {{domain}}"
     },
     'password': {
       'name': "Password",

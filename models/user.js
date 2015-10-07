@@ -13,6 +13,7 @@ var bcrypt = require('bcrypt');
 var autoIncrement = require('mongoose-auto-increment');
 
 var ERRORS = require('../public/scripts/errors');
+var CONFIG = require('../config');
 
 //JSON response object
 var Resp = function(obj) {
@@ -59,7 +60,7 @@ module.exports = function(mongoose) {
 
   //Check password validity and confirmation
   var validatePassword = function(password, cpassword) {
-    validations = [
+    var validations = [
       {
         msg: ERRORS.signup['password']['missing'],
         check: function(pw, cpw) { return (typeof pw !== "undefined"); }
@@ -80,6 +81,23 @@ module.exports = function(mongoose) {
     var results = [];
     validations.map(function(validation) {
       if (!validation.check(password, cpassword)) {
+        results.push(validation.msg);
+      }
+    });
+    var error =  (results.length > 0) ? results[0] : null;
+    return error;
+  };
+
+  var validateEmail = function(email) {
+    var validations = [
+      {
+        msg: ERRORS.signup['email']['domain'].replace('{{domain}}', CONFIG.EMAIL_DOMAIN),
+        check: function(email, domain) { return  (email.indexOf("@" + CONFIG.EMAIL_DOMAIN) > - 1) }
+      }
+    ];
+    var results = [];
+    validations.map(function(validation) {
+      if (!validation.check(email)) {
         results.push(validation.msg);
       }
     });
@@ -132,8 +150,14 @@ module.exports = function(mongoose) {
       userObj[field] = postData[field];
     }
 
+
     //Check for matching passwords
     resp.error = validatePassword(userObj.password, postData.cpassword);
+    if (resp.error) {
+      return respond(resp, cb);
+    }
+
+    resp.error = validateEmail(userObj.email);
     if (resp.error) {
       return respond(resp, cb);
     }
