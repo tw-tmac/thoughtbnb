@@ -7,9 +7,10 @@ var assert = require("assert");
 var mongoose = require('mongoose');
 
 var ERRORS = require('../../public/scripts/errors');
+var CONFIG = require('../../config');
 
 //Connect to MongoDB
-var mongoUrl = "mongodb://localhost/buet73tests";
+var mongoUrl = "mongodb://localhost/thoughtbnbtests";
 mongoose.connect(mongoUrl);
 var db = mongoose.connection;
 
@@ -22,10 +23,6 @@ var reqFields = [
   'phone',
   'password',
 ];
-var optFields = [
-];
-var allFields = reqFields.concat(optFields);
-
 
 
 describe("MongoDB Connection", function() {
@@ -38,7 +35,7 @@ var bobCount = 0;
 var newBob = function(reg) {
   var bob = {
     name: "Bob Something",
-    email: "bsomething" + (bobCount++) + "@thoughtworks.com",
+    email: "bsomething" + (bobCount++) + "@" + CONFIG.EMAIL_DOMAIN,
     password: "unhashedpassword",
     phone: "1 123 1234",
   };
@@ -146,23 +143,6 @@ describe("User Module", function() {
             user.register(bob, function(resp) {
             resp.error.should.equal(ERRORS.signup[field]['missing']);
             done();
-            });
-          });
-        });
-      });
-
-      describe("Optional Fields", function() {
-        optFields.map(function(field) {
-          it("should save "+field, function(done) {
-            bob[field] = "TestValue";
-            user.register(bob, function(resp) {
-              (resp.error === null).should.be.ok;
-              var obj = {};
-              obj[field] = "TestValue";
-              user.model.count(obj, function(err, count) {
-                count.should.equal(1);
-                done();
-              });
             });
           });
         });
