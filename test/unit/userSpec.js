@@ -148,18 +148,6 @@ describe("User Module", function() {
         });
       });
 
-      describe("Missing Optional Field", function() {
-        reqFields.map(function(field) {
-          it("should still save successfully when "+field+" is missing", function(done) {
-            delete bob[field];
-            user.register(bob, function(resp) {
-              resp.error.should.equal(ERRORS.signup[field]['missing']);
-              done();
-            });
-          });
-        });
-      });
-
       describe("Email", function() {
         it("should return an error if not unique", function(done) {
           var bob = newBob(true);

@@ -114,8 +114,6 @@ module.exports = function(mongoose) {
       'name',
       'phone'
     ];
-    var optFields = [
-    ];
 
     var userObj = {};
     //Add all required fields to userObj, return error if missing
@@ -132,13 +130,6 @@ module.exports = function(mongoose) {
         return respond(resp, cb);
       }
       userObj[field] = postData[field];
-    }
-    //Add all optional fields if they exist
-    for (var j=0; j<reqFields.length; j++) {
-      var optField = optFields[j];
-      if (typeof postData[optField] !== "undefined") {
-        userObj[optField] = postData[optField];
-      }
     }
 
     //Check for matching passwords
