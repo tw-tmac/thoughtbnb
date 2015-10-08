@@ -8,7 +8,7 @@ html
     script(type='text/javascript', src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
     script(type='text/javascript', src='/scripts/global.js')
   body
-    .container.main-container
+    .container
       .navbar.navbar-inverse.navbar-fixed-top(role='navigation')
         .container
           .navbar-header
@@ -29,4 +29,5 @@ html
                   a(href='/') Home
                 li
                   a(href='/signin') Sign In
-    block content
+    .container.main-container(role="main")
+      block content

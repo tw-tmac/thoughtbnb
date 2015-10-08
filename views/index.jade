@@ -1,8 +1,7 @@
 extends layout
 
 block content
-  h1= title
   if (user)
-    p Hello #{user.name}
+    include ./userHome.jade
   else
-    p Welcome to #{title}
+    include ./publicHome.jade
