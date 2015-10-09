@@ -93,7 +93,7 @@ describe("User Module", function() {
 
       describe("Required Fields", function() {
         var specialFields = ['email', 'password'];
-        var fields = reqFields.filter(function(v) { return specialFields.indexOf(v) === -1 });
+        var fields = reqFields.filter(function(v) { return specialFields.indexOf(v) === -1; });
         fields.map(function(field) {
           it("should save "+field, function(done) {
             bob[field] = "TestValue";

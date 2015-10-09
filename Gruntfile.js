@@ -6,7 +6,7 @@ module.exports = function(grunt) {
       options: {
         reporter: 'spec'
       },
-      all: { src: ['test/unit/*.js'] }
+      all: { src: ['test/integration/*.js'] }
     },
     jshint: {
       all: [

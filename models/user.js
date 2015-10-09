@@ -92,7 +92,7 @@ module.exports = function(mongoose) {
     var validations = [
       {
         msg: ERRORS.signup['email']['domain'].replace('{{domain}}', CONFIG.EMAIL_DOMAIN),
-        check: function(email, domain) { return  (email.indexOf("@" + CONFIG.EMAIL_DOMAIN) > - 1) }
+        check: function(email, domain) { return  (email.indexOf("@" + CONFIG.EMAIL_DOMAIN) > - 1); }
       }
     ];
     var results = [];
