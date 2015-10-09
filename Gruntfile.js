@@ -15,6 +15,7 @@ module.exports = function(grunt) {
         'Gruntfile.js',
         'models',
         'public/scripts/*.js',
+        '!public/scripts/*.min.js',
         'routes',
         'views/*.js',
         'test'
