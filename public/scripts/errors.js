@@ -1,10 +1,6 @@
 var ERRORS = (function() {
   var self = {};
 
-  var isRequired = function(title) {
-    return "Please provide your " + title + ".";
-  };
-
   self.signup =  {
     'name': {
       'name': "Name"
@@ -24,9 +20,6 @@ var ERRORS = (function() {
     }
   };
 
-  for (var field in self.signup) {
-    self.signup[field].missing = isRequired(self.signup[field].name);
-  }
 
   self.user = {
     'notFound': "The user was not found."
@@ -36,6 +29,26 @@ var ERRORS = (function() {
     'notFound': "The email provided is not registered.",
     'wrongPassword': "The password provided is incorrect."
   };
+
+  self.listing = {
+    'location': {
+      'name': 'location'
+    }
+  };
+
+  var isRequired = function(title) {
+    return "Please provide a " + title + ".";
+  };
+
+  [
+    self.signup,
+    self.listing
+  ].forEach(function(form) {
+    for (var field in form) {
+      form[field].missing = isRequired(form[field].name);
+    }
+  });
+
 
   return self;
 })();
