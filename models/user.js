@@ -41,7 +41,7 @@ module.exports = function(mongoose) {
    */
 
   //User Schema
-  var schema = new mongoose.Schema({
+  var userSchema = new mongoose.Schema({
     name: String,
     email: String,
     password: String,
@@ -50,10 +50,10 @@ module.exports = function(mongoose) {
     TS: Date
   });
   autoIncrement.initialize(mongoose);
-  schema.plugin(autoIncrement.plugin, 'User');
+  userSchema.plugin(autoIncrement.plugin, 'User');
 
   //User Model
-  User = User || mongoose.model('User', schema);
+  User = User || mongoose.model('User', userSchema);
 
   //Export Model
   self.model = User;

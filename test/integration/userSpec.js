@@ -4,14 +4,14 @@
 
 var should = require("should");
 var assert = require("assert");
-var mongoose = require('mongoose');
+
+var helper = require('./specHelper');
 
 var ERRORS = require('../../public/scripts/errors');
 var CONFIG = require('../../config');
 
 //Connect to MongoDB
-var mongoUrl = "mongodb://localhost/thoughtbnbtests";
-mongoose.connect(mongoUrl);
+var mongoose = helper.mongoose;
 var db = mongoose.connection;
 
 //Require User Module, passing mongoose
@@ -24,28 +24,7 @@ var reqFields = [
   'password',
 ];
 
-
-describe("MongoDB Connection", function() {
-  it("should connect to mongo", function(done) {
-    db.once('open', done);
-  });
-});
-
-var bobCount = 0;
-var newBob = function(reg) {
-  var bob = {
-    name: "Bob Something",
-    email: "bsomething" + (bobCount++) + "@" + CONFIG.EMAIL_DOMAIN,
-    password: "unhashedpassword",
-    phone: "1 123 1234",
-  };
-  reg = (typeof reg === "undefined") ? false : reg;
-  if (reg)
-    {
-      bob.cpassword = bob.password;
-    }
-    return bob;
-};
+var newBob = helper.newBob;
 
 var emptyDoc = function(cb) {
   user.model.remove({}, function(err) {
@@ -162,7 +141,7 @@ describe("User Module", function() {
         });
         it("should reject an email address if it does not have the correct domain", function(done) {
           var bob = newBob(true);
-          bob.email = "invalidemail" + (bobCount++) + "@invaliddomain.com",
+          bob.email = "invalidemail@invaliddomain.com",
           user.register(bob, function(resp) {
             resp.error.should.equal(ERRORS.signup['email']['domain'].replace('{{domain}}', CONFIG.EMAIL_DOMAIN));
             done();
