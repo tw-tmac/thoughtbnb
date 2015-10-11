@@ -11,10 +11,6 @@ db.once('open', function cb() {
 
 module.exports.mongoose = mongoose;
 
-
-require('../../models/user');
-require('../../models/listing');
-
 var CONFIG = require('../../config');
 
 var bobCount = 0;

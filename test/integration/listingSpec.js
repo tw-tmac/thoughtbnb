@@ -14,13 +14,13 @@ var mongoose = helper.mongoose;
 var db = mongoose.connection;
 
 //Require User Module, passing mongoose
-var user = require("../../models/user")(mongoose);
-var listing = require("../../models/listing")(mongoose);
+var User = require("../../models/User")(mongoose);
+var Listing = require("../../models/Listing")(mongoose);
 
 var newBob = helper.newBob;
 
 var emptyDoc = function(cb) {
-  user.model.remove({}, function(err) {
+  User.model.remove({}, function(err) {
     if (typeof cb === "function") {
       cb(err);
     }

@@ -15,7 +15,7 @@ var mongoose = helper.mongoose;
 var db = mongoose.connection;
 
 //Require User Module, passing mongoose
-var user = require("../../models/user")(mongoose);
+var User = require("../../models/User")(mongoose);
 
 var reqFields = [
   'name',
@@ -27,7 +27,7 @@ var reqFields = [
 var newBob = helper.newBob;
 
 var emptyDoc = function(cb) {
-  user.model.remove({}, function(err) {
+  User.model.remove({}, function(err) {
     if (typeof cb === "function") {
       cb(err);
     }
@@ -47,7 +47,7 @@ describe("User Module", function() {
 
     it("should create a User object", function() {
       var bob = newBob();
-      bobby = new user.model(bob);
+      bobby = new User.model(bob);
       bob.name.should.equal(bobby.name);
 
     });
@@ -61,7 +61,7 @@ describe("User Module", function() {
       });
 
       it("should return the user when there are no errors", function(done) {
-        user.register(bob, function(resp) {
+        User.register(bob, function(resp) {
           (resp.error === null).should.be.ok;
           (typeof resp.data.users.length).should.equal("number");
           resp.data.users.length.should.equal(1);
@@ -76,11 +76,11 @@ describe("User Module", function() {
         fields.map(function(field) {
           it("should save "+field, function(done) {
             bob[field] = "TestValue";
-            user.register(bob, function(resp) {
+            User.register(bob, function(resp) {
               (resp.error === null).should.be.ok;
               var obj = {};
               obj[field] = "TestValue";
-              user.model.count(obj, function(err, count) {
+              User.model.count(obj, function(err, count) {
                 count.should.equal(1);
                 done();
               });
@@ -92,10 +92,10 @@ describe("User Module", function() {
           var john = newBob();
           john.password = "TestPassword";
           john.cpassword = "TestPassword";
-          user.register(john, function(resp) {
+          User.register(john, function(resp) {
             (resp.error === null).should.be.ok;
             var encryptedPw = resp.data.users[0].password;
-            user.comparePassword(john.password, encryptedPw, function(err, same) {
+            User.comparePassword(john.password, encryptedPw, function(err, same) {
               same.should.be.ok;
               done();
             });
@@ -107,7 +107,7 @@ describe("User Module", function() {
         reqFields.map(function(field) {
           it("should return an error when "+field+" is missing", function(done) {
             delete bob[field];
-            user.register(bob, function(resp) {
+            User.register(bob, function(resp) {
               resp.error.should.equal(ERRORS.signup[field]['missing']);
               done();
             });
@@ -120,7 +120,7 @@ describe("User Module", function() {
           it("should return an error when "+field+" is blank", function(done) {
             bob = newBob(true);
             bob[field] = "";
-            user.register(bob, function(resp) {
+            User.register(bob, function(resp) {
             resp.error.should.equal(ERRORS.signup[field]['missing']);
             done();
             });
@@ -131,9 +131,9 @@ describe("User Module", function() {
       describe("Email", function() {
         it("should return an error if not unique", function(done) {
           var bob = newBob(true);
-          user.register(bob, function(response) {
+          User.register(bob, function(response) {
             (response.error === null).should.be.ok;
-            user.register(bob, function(resp) {
+            User.register(bob, function(resp) {
               resp.error.should.equal(ERRORS.signup['email']['duplicate']);
               done();
             });
@@ -142,7 +142,7 @@ describe("User Module", function() {
         it("should reject an email address if it does not have the correct domain", function(done) {
           var bob = newBob(true);
           bob.email = "invalidemail@invaliddomain.com",
-          user.register(bob, function(resp) {
+          User.register(bob, function(resp) {
             resp.error.should.equal(ERRORS.signup['email']['domain'].replace('{{domain}}', CONFIG.EMAIL_DOMAIN));
             done();
           });
@@ -156,21 +156,21 @@ describe("User Module", function() {
         });
 
         it("should encrypt the password", function(done) {
-          user.register(bob, function(resp) {
+          User.register(bob, function(resp) {
             resp.data.users[0].password.should.not.equal(bob.password);
             done();
           });
         });
         it("should return an error when confirmation field is missing", function(done) {
           delete bob.cpassword;
-          user.register(bob, function(resp) {
+          User.register(bob, function(resp) {
             resp.error.should.equal(ERRORS.signup['password']['unconfirmed']);
             done();
           });
         });
         it("should return an error on mismatch", function(done) {
           bob.cpassword = "mismatch";
-          user.register(bob, function(resp) {
+          User.register(bob, function(resp) {
             resp.error.should.equal(ERRORS.signup['password']['mismatch']);
             done();
           });
@@ -178,7 +178,7 @@ describe("User Module", function() {
         it("should return an error when blank", function(done) {
           bob.password = "";
           bob.cpassword = "";
-          user.register(bob, function(resp) {
+          User.register(bob, function(resp) {
             resp.error.should.equal(ERRORS.signup['password']['missing']);
             done();
           });
@@ -187,7 +187,7 @@ describe("User Module", function() {
 
       describe("No Callback", function() {
         it("should not throw any errors", function() {
-          (user.register(bob) || true).should.be.ok;
+          (User.register(bob) || true).should.be.ok;
         });
       });
 
@@ -205,8 +205,8 @@ describe("User Module", function() {
         bob = newBob(true);
         james = newBob(true);
         james.name = "James";
-        user.register(bob, function(resp) {
-          user.register(james, function(resp) {
+        User.register(bob, function(resp) {
+          User.register(james, function(resp) {
             delete bob.cpassword;
             delete james.cpassword;
             done();
@@ -221,11 +221,11 @@ describe("User Module", function() {
       describe("No Criteria", function() {
 
         it("should not throw any errors when no parameters are passed", function() {
-          (user.find(bob) || true).should.be.ok;
+          (User.find(bob) || true).should.be.ok;
         });
 
         it("should return all users when empty object is passed", function(done) {
-          user.find({}, function(resp) {
+          User.find({}, function(resp) {
             (resp.error === null).should.be.ok;
             resp.data.users.length.should.equal(2);
             done();
@@ -236,7 +236,7 @@ describe("User Module", function() {
       describe("Single Criterion", function() {
 
         it("should return one user when sent one criterion matching one record", function(done) {
-          user.find({ name: bob.name}, function(resp) {
+          User.find({ name: bob.name}, function(resp) {
             (resp.error === null).should.be.ok;
             resp.data.users.length.should.equal(1);
             resp.data.users[0].name.should.equal(bob.name);
@@ -245,7 +245,7 @@ describe("User Module", function() {
         });
 
         it("should two multiple users with one criterion matching two records", function(done) {
-          user.find({ country: bob.country}, function(resp) {
+          User.find({ country: bob.country}, function(resp) {
             (resp.error === null).should.be.ok;
             resp.data.users.length.should.equal(2);
             resp.data.users[0].name.should.equal(bob.name);
@@ -258,7 +258,7 @@ describe("User Module", function() {
       describe("Multiple Criteria", function() {
 
         it("should return one user when sent criteria matching one record", function(done) {
-          user.find({ name: bob.name, phone: bob.phone}, function(resp) {
+          User.find({ name: bob.name, phone: bob.phone}, function(resp) {
             (resp.error === null).should.be.ok;
             resp.data.users.length.should.equal(1);
             resp.data.users[0].name.should.equal(bob.name);
@@ -268,7 +268,7 @@ describe("User Module", function() {
         });
 
         it("should return two users with criteria matching two records", function(done) {
-          user.find({ country: bob.country, zip: james.zip}, function(resp) {
+          User.find({ country: bob.country, zip: james.zip}, function(resp) {
             (resp.error === null).should.be.ok;
             resp.data.users.length.should.equal(2);
             resp.data.users[0].name.should.equal(bob.name);
@@ -278,7 +278,7 @@ describe("User Module", function() {
         });
 
         it("should return one user with a user passed as the criteria", function(done) {
-          user.find(bob, function(resp) {
+          User.find(bob, function(resp) {
             (resp.error === null).should.be.ok;
             resp.data.users.length.should.equal(1);
             resp.data.users[0].name.should.equal(bob.name);
@@ -303,8 +303,8 @@ describe("User Module", function() {
         john = newBob();
         john.name = "John";
         john.cpassword = john.password;
-        user.register(bob, function(resp) {
-          user.register(john, function(resp2) {
+        User.register(bob, function(resp) {
+          User.register(john, function(resp2) {
             delete john.cpassword;
             done();
           });
@@ -314,32 +314,32 @@ describe("User Module", function() {
       //afterEach(emptyDoc);
 
       it("should return an error if userID property is missing", function(done) {
-        user.update({}, function(resp) {
+        User.update({}, function(resp) {
           resp.error.should.equal(ERRORS.user['notFound']);
           done();
         });
       });
 
       it("should return an error if userID is invalid", function(done) {
-        user.update({ _id: "1234" }, function(resp) {
+        User.update({ _id: "1234" }, function(resp) {
           resp.should.have.property("error");
           done();
         });
       });
 
       it("should return an error if userID not found", function(done) {
-        user.update({ _id: "987654321" }, function(resp) {
+        User.update({ _id: "987654321" }, function(resp) {
           resp.error.should.equal(ERRORS.user['notFound']);
           done();
         });
       });
 
       it("should update the database with the user data passed", function(done) {
-        user.find(john, function(findResp) {
+        User.find(john, function(findResp) {
           john._id = findResp.data.users[0].id;
           john.phone = "3125551234";
 
-          user.update(john, function(updateResp) {
+          User.update(john, function(updateResp) {
             (updateResp.error === null).should.be.ok;
 
             var match = true;
@@ -349,7 +349,7 @@ describe("User Module", function() {
               }
               match.should.be.ok;
 
-              user.find({_id: john._id}, function(resp) {
+              User.find({_id: john._id}, function(resp) {
                 resp.data.users.length.should.equal(1);
                 match = true;
                 for (var field in john)
@@ -379,8 +379,8 @@ describe("User Module", function() {
         john = newBob(true);
         john.name = "John";
         emptyDoc(function(err) {
-          user.register(bobby, function(resp) {
-            user.register(john, function(resp2) {
+          User.register(bobby, function(resp) {
+            User.register(john, function(resp2) {
               delete bobby.cpassword;
               delete john.cpassword;
               done();
@@ -390,33 +390,33 @@ describe("User Module", function() {
       });
 
       it("should return an error if userID property is missing", function(done) {
-        user.remove({}, function(resp) {
+        User.remove({}, function(resp) {
           resp.error.should.equal(ERRORS.user['notFound']);
           done();
         });
       });
 
       it("should return an error if userID is invalid", function(done) {
-        user.remove({ _id: "1234" }, function(resp) {
+        User.remove({ _id: "1234" }, function(resp) {
           resp.should.have.property("error");
           done();
         });
       });
 
       it("should return an error if userID not found", function(done) {
-        user.remove({ _id: "987654321" }, function(resp) {
+        User.remove({ _id: "987654321" }, function(resp) {
           resp.error.should.equal(ERRORS.user['notFound']);
           done();
         });
       });
 
       it("should remove the user when valid userID is provided", function(done) {
-        user.find(john, function(findResp) {
+        User.find(john, function(findResp) {
           john._id = findResp.data.users[0].id;
 
-          user.remove({_id: john._id}, function(resp) {
+          User.remove({_id: john._id}, function(resp) {
             (resp.error === null).should.be.ok;
-            user.model.count({}, function(err, count) {
+            User.model.count({}, function(err, count) {
               // Only Bob should be left
               count.should.equal(1);
               done();
@@ -426,12 +426,12 @@ describe("User Module", function() {
       });
 
       it("should remove the user when a user is provided", function(done) {
-        user.find(john, function(findResp) {
+        User.find(john, function(findResp) {
           john._id = findResp.data.users[0].id;
 
-          user.remove(john, function(resp) {
+          User.remove(john, function(resp) {
             (resp.error === null).should.be.ok;
-            user.model.count({}, function(err, count) {
+            User.model.count({}, function(err, count) {
               // Only Bob should be left
               count.should.equal(1);
               done();
@@ -449,7 +449,7 @@ describe("User Module", function() {
     before(function(done) {
       bob = newBob(true);
       emptyDoc(function() {
-        user.register(bob, function(resp) {
+        User.register(bob, function(resp) {
           delete bob.cpassword;
           done();
         });
@@ -465,7 +465,7 @@ describe("User Module", function() {
         email: bob.email,
         password: bob.password
       };
-      user.authenticate(bobby, function(resp) {
+      User.authenticate(bobby, function(resp) {
         (resp.error === null).should.be.ok;
         resp.data.should.have.property('user');
         resp.data.user.name.should.equal(bob.name);
@@ -478,7 +478,7 @@ describe("User Module", function() {
         email: "fakeEmail@email.com",
         password: bob.password
       };
-      user.authenticate(bobby, function(resp) {
+      User.authenticate(bobby, function(resp) {
         resp.should.have.property('error');
         resp.error.should.equal(ERRORS.auth['notFound']);
         done();
@@ -490,7 +490,7 @@ describe("User Module", function() {
         email: bob.email,
         password: "WrongPassword"
       };
-      user.authenticate(bobby, function(resp) {
+      User.authenticate(bobby, function(resp) {
         resp.should.have.property('error');
         resp.error.should.equal(ERRORS.auth['wrongPassword']);
         done();
