@@ -8,7 +8,6 @@ var expressSession = require('express-session');
 var MongoStore = require('connect-mongo')(expressSession);
 
 var publicRoutes = require('./routes/index');
-var users = require('./routes/users');
 var listings = require('./routes/listings');
 var auth = require('./routes/auth');
 
@@ -46,7 +45,6 @@ app.use(function(req, res, next) {
 
 app.use('/', publicRoutes);
 app.use('/', auth);
-app.use('/users', users);
 app.use('/listings', listings);
 
 // catch 404 and forward to error handler
