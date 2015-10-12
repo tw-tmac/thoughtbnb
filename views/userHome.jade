@@ -13,4 +13,10 @@ h1= user.name
       textarea#description.form-control(placeholder="Description")
     .form-group
       button#btnAdd.btn.btn-primary Add
-  script(src="/scripts/userHome.js")
+#listings(ng-app="thoughtbnb", ng-controller="ListingsController")
+  .listing.panel.panel-default.col-xs-6.col-sm-4(ng-repeat="listing in listings")
+    .panel-body
+      h3 {{listing.location}}
+      p {{listing.description}}
+script(src="/scripts/userHome.js")
+script(src="/scripts/listingsController.js")

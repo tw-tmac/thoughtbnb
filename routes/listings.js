@@ -21,4 +21,18 @@ router.post('/', function(req, res) {
   });
 });
 
+router.get('/', function(req, res) {
+  Listing.search({}, function(resp) {
+    respond(res, resp);
+  });
+});
+
+router.get('/me', function(req, res) {
+  Listing.search({
+    user: req.session.user._id
+  }, function(resp) {
+    respond(res, resp);
+  });
+});
+
 module.exports = router;
