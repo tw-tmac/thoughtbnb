@@ -62,6 +62,20 @@ module.exports = function(mongoose) {
     }
   };
 
+  self.search = function(criteria, cb) {
+    Listing.find(criteria, function(err, listings) {
+      var resp = new Resp();
+      if (err) {
+        resp.error = err;
+        return respond(resp, cb);
+      }
+      resp = new Resp({
+        'listings': listings
+      });
+      return respond(resp, cb);
+    });
+  };
+
   self.removeAll = function(cb) {
     Listing.remove({}, cb);
   };

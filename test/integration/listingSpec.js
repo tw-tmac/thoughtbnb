@@ -49,7 +49,7 @@ describe("Listing Model", function() {
     bob = newBob(true);
   });
 
-  describe('Create', function() {
+  describe("Create", function() {
     it("should create a new listing associated with a user", function(done) {
       User.register(bob, function(response) {
         var listingData = {
@@ -86,6 +86,75 @@ describe("Listing Model", function() {
         Listing.create(listingData, function(resp) {
           resp.error.should.equal(ERRORS.listing.user.missing);
           done();
+        });
+      });
+    });
+  });
+
+  describe("Search", function() {
+    it("should return zero listings when no listings exist", function(done) {
+      emptyDoc(function() {
+        Listing.search({}, function(resp) {
+          (resp.error === null).should.be.ok;
+          resp.data.listings.length.should.equal(0);
+          done();
+        });
+      });
+    });
+
+    it("should return a listing when one exists", function(done) {
+      User.register(newBob(true), function(resp1) {
+        var user = resp1.data.users[0];
+        Listing.create({ 'user': user._id, location: "A"}, function() {
+
+          Listing.search({}, function(resp) {
+            resp.data.listings.length.should.equal(1);
+            resp.data.listings[0].user.should.equal(user._id);
+            done();
+          });
+
+        });
+      });
+    });
+
+    it("should return two listings when two listings exist from different users", function(done) {
+      User.register(newBob(true), function(resp1) {
+        var userA = resp1.data.users[0];
+          Listing.create({ 'user': userA._id, location: "A"}, function() {
+          User.register(newBob(true), function(resp2) {
+            var userB = resp2.data.users[0];
+            Listing.create({ 'user': userB._id, location: "B"}, function() {
+
+              Listing.search({}, function(resp) {
+                resp.data.listings.length.should.equal(2);
+                done();
+              });
+
+            });
+          });
+        });
+      });
+    });
+
+    it("should return only the given user's listings when their id is provided", function(done) {
+      User.register(newBob(true), function(resp1) {
+        var userA = resp1.data.users[0];
+          Listing.create({ 'user': userA._id, location: "A"}, function() {
+          User.register(newBob(true), function(resp2) {
+            var userB = resp2.data.users[0];
+            Listing.create({ 'user': userB._id, location: "B"}, function() {
+
+              var criterion = {
+                'user': userA._id
+              };
+              Listing.search(criterion, function(resp) {
+                resp.data.listings.length.should.equal(1);
+                resp.data.listings[0].user.should.equal(userA._id);
+                done();
+              });
+
+            });
+          });
         });
       });
     });
