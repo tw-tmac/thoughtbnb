@@ -49,42 +49,44 @@ describe("Listing Model", function() {
     bob = newBob(true);
   });
 
-  it("should create a new listing associated with a user", function(done) {
-    User.register(bob, function(response) {
-      var listingData = {
-        user: response.data.users[0]._id,
-        location: 'Wilmington, Delaware',
-        description: "Best place ever!"
-      };
-      Listing.create(listingData, function(resp) {
-        (resp.error === null).should.be.ok;
-        resp.data.listings.length.should.equal(1);
-        resp.data.listings[0].user.should.equal(listingData.user);
-        done();
+  describe('Create', function() {
+    it("should create a new listing associated with a user", function(done) {
+      User.register(bob, function(response) {
+        var listingData = {
+          user: response.data.users[0]._id,
+          location: 'Wilmington, Delaware',
+          description: "Best place ever!"
+        };
+        Listing.create(listingData, function(resp) {
+          (resp.error === null).should.be.ok;
+          resp.data.listings.length.should.equal(1);
+          resp.data.listings[0].user.should.equal(listingData.user);
+          done();
+        });
       });
     });
-  });
 
-  it("should return an error if the location is not specified", function(done) {
-    User.register(bob, function(response) {
-      var listingData = {
-        user: response.data.users[0]._id,
-      };
-      Listing.create(listingData, function(resp) {
-        resp.error.should.equal(ERRORS.listing.location.missing);
-        done();
+    it("should return an error if the location is not specified", function(done) {
+      User.register(bob, function(response) {
+        var listingData = {
+          user: response.data.users[0]._id,
+        };
+        Listing.create(listingData, function(resp) {
+          resp.error.should.equal(ERRORS.listing.location.missing);
+          done();
+        });
       });
     });
-  });
 
-  it("should return an error if the user is not specified", function(done) {
-    User.register(bob, function(response) {
-      var listingData = {
-        location: "Wilmington, Delaware"
-      };
-      Listing.create(listingData, function(resp) {
-        resp.error.should.equal(ERRORS.listing.user.missing);
-        done();
+    it("should return an error if the user is not specified", function(done) {
+      User.register(bob, function(response) {
+        var listingData = {
+          location: "Wilmington, Delaware"
+        };
+        Listing.create(listingData, function(resp) {
+          resp.error.should.equal(ERRORS.listing.user.missing);
+          done();
+        });
       });
     });
   });
