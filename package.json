@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "test": "grunt test"
+    "pretest": "grunt jshint",
+    "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha test/integration/*"
   },
   "dependencies": {
     "body-parser": "~1.12.0",
@@ -24,6 +25,8 @@
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-simple-mocha": "~0.4.0",
-    "should": "~4.4.1"
+    "should": "~4.4.1",
+    "istanbul": "^0.3.22",
+    "mocha": "^2.3.3"
   }
 }
