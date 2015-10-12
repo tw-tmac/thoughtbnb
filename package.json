@@ -16,10 +16,10 @@
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
     "bcrypt": "^0.8.5",
-    "mongoose": "~4.0.0",
+    "mongoose": "~4.1.10",
     "express-session": "^1.11.3",
     "connect-mongo": "^0.8.2",
-    "mongoose-auto-increment": "^4.0.0"
+    "mongoose-auto-increment": "asifrc/mongoose-auto-increment#9429cb9b7ef7a718744fe8cdef034bc7ce4a2659"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
