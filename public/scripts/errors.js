@@ -32,7 +32,10 @@ var ERRORS = (function() {
 
   self.listing = {
     'location': {
-      'name': 'location'
+      'name': "location"
+    },
+    'user': {
+      'name': "user id"
     }
   };
 
