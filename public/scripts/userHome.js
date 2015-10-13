@@ -3,7 +3,7 @@ var addAddress = function() {
     'location': $('#location').val(),
     'description': $('#description').val()
   };
-  $.post('/listings/', listing, function(data) {
+  $.post('/api/listings/', listing, function(data) {
     asif = data;
     updateListings();
   });
