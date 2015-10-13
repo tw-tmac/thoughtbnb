@@ -2,4 +2,10 @@ extends layout
 
 block content
   h1=title
-
+  #listings(ng-app="thoughtbnb", ng-controller="ListingsController")
+    .listing.panel.panel-default.col-xs-6.col-sm-4(ng-repeat="listing in listings")
+      .panel-body
+        h3 {{listing.location}}
+        p {{listing.description}}
+  script(src="/scripts/listings.js")
+  script(src="/scripts/listingsController.js")
