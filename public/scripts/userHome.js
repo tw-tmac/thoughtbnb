@@ -10,7 +10,7 @@ var addAddress = function() {
 };
 
 var updateListings = function() {
-  $.get('/listings/me', function(resp) {
+  $.get('/api/listings/me', function(resp) {
 
     var scope = angular.element($('#listings')).scope();
     scope.$apply(function() {
