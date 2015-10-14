@@ -5,7 +5,9 @@ h1= user.name
     .form-group
       label(for="location") Location
       .input-group
-        input#location.form-control(type="text", placeholder="City, State")
+        select#location.form-control
+          option(selected='selected', disabled='disabled')
+          include locationOptions
         span.input-group-addon
           span.glyphicon.glyphicon-map-marker
     .form-group
