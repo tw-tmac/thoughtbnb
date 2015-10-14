@@ -6,13 +6,17 @@ var addAddress = function() {
   $.post('/api/listings/', listing, function(data) {
     if (data.error) {
       $('#formError').text(data.error);
-      if(data.error===ERRORS.listing.location.missing) {
-        $('#location').addClass('has-error');
-      }
       return false;
     }
     updateListings();
+    resetListingForm();
   });
+};
+
+var resetListingForm = function() {
+  $('#location, #description').val('');
+  $('#formError').text('');
+
 };
 
 var updateListings = function() {
