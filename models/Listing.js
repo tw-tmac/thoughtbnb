@@ -63,7 +63,7 @@ module.exports = function(mongoose) {
   };
 
   self.search = function(criteria, cb) {
-    Listing.find(criteria, function(err, listings) {
+    Listing.find(criteria).populate('user').exec(function(err, listings) {
       var resp = new Resp();
       if (err) {
         resp.error = err;

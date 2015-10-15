@@ -109,7 +109,7 @@ describe("Listing Model", function() {
 
           Listing.search({}, function(resp) {
             resp.data.listings.length.should.equal(1);
-            resp.data.listings[0].user.should.equal(user._id);
+            resp.data.listings[0].user.id.should.equal(user._id.toString());
             done();
           });
 
@@ -149,7 +149,7 @@ describe("Listing Model", function() {
               };
               Listing.search(criterion, function(resp) {
                 resp.data.listings.length.should.equal(1);
-                resp.data.listings[0].user.should.equal(userA._id);
+                resp.data.listings[0].user.id.should.equal(userA._id.toString());
                 done();
               });
 
