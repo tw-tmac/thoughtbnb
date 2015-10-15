@@ -9,14 +9,15 @@ router.get('/', function(req, res, next) {
 router.get('/signin', function(req, res) {
   var locals = {
     title: "Sign In",
-    nextUrl: req.session.nextUrl || "/"
+    nextUrl: req.session.nextUrl || "/",
+    activeLink: 'signin'
   };
   delete req.session.nextUrl;
   res.render('signin', locals);
 });
 
 router.get('/signup', function(req, res) {
-  res.render('signup', { title: "Sign Up" });
+  res.render('signup', { title: "Sign Up", activeLink: 'signin' });
 });
 
 router.get('/signout', function(req, res) {

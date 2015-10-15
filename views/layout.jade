@@ -29,17 +29,15 @@ html
             a.navbar-brand(href="/") ThoughtBnB
           .navbar-collapse.collapse
             ul.navbar-nav.nav.navbar-right
+              li(class=typeof activeLink === "undefined" ? "active" : "")
+                a(href='/') Home
               if user
-                li.active
-                  a(href='/') Home
-                li
+                li(class=activeLink === "listings" ? "active" : "")
                   a(href='/listings') Listings
                 li
                   a(href='/signout') Log Out
               else
-                li.active
-                  a(href='/') Home
-                li
+                li(class=activeLink === "signin" ? "active" : "")
                   a(href='/signin') Sign In
     .container.main-container(role="main")
       block content
