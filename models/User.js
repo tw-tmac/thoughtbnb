@@ -11,6 +11,7 @@
 
 var bcrypt = require('bcrypt');
 var autoIncrement = require('mongoose-auto-increment');
+var crypto = require('crypto');
 
 var ERRORS = require('../public/scripts/errors');
 var CONFIG = require('../config');
@@ -47,7 +48,9 @@ module.exports = function(mongoose) {
     password: String,
     phone: String,
     address: String,
-    TS: Date
+    TS: Date,
+    token: String,
+    isActive: Boolean
   });
   autoIncrement.initialize(mongoose);
   userSchema.plugin(autoIncrement.plugin, 'User');
@@ -116,7 +119,11 @@ module.exports = function(mongoose) {
   };
   self.comparePassword = comparePassword;
 
-
+  //generate user token
+  self.generateToken = function(key) {
+    var salt = CONFIG.salt;
+    return crypto.createHash('md5').update(key + salt).digest('hex');
+  };
   /**
    * Register User (Save to Database)
    */
@@ -168,7 +175,8 @@ module.exports = function(mongoose) {
         resp.error = err;
         return respond(resp, cb);
       }
-
+      userObj.token = generateToken(userObj.email + userObj.name);
+      userObj.isActive = false;
       userObj.password = encryptedPassword;
 
       //Ensure unique email
@@ -233,6 +241,35 @@ module.exports = function(mongoose) {
     });
   };
 
+  var findByToken = function(token, cb, handler) {
+    var resp = new Resp();
+    findUser({token: token}, function(response) {
+      if (response.error) {
+        return handler(response);
+      }
+      if (response.data.users.length != 1) {
+        resp.error = ERRORS.user['notFound'];
+        return handler(resp);
+      }
+      handler(response);
+    });
+  };
+
+
+  self.activateUser = function(token, cb){
+    var resp = new Resp();
+      findByToken(token, cb, function(response) {
+        if(response.data.users[0].token == token)
+        {
+          response.data.users[0].isActive = true;
+          response.data.users[0].save(function(err, usr) {
+            resp = new Resp({users: [usr] });
+            resp.error = err;
+            return respond(resp, cb);
+          });
+        }
+      });
+  };
   /**
    * Update User by ID
    */

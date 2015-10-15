@@ -62,6 +62,25 @@ describe("User Model", function() {
       });
     });
 
+    it("should generate token", function(done) {
+      User.register(bob, function(resp) {
+        (resp.error === null).should.be.ok;
+        resp.data.users[0].token.should.not.equal(null);
+        done();
+      });
+    });
+
+    it("should activate user with a token", function(done) {
+      User.register(bob, function(resp) {
+        (resp.error === null).should.be.ok;
+        User.activateUser(resp.data.users[0].token, function(activateResponse){
+          activateResponse.data.users[0].isActive.should.be.true;
+        });
+
+        done();
+      });
+    });
+
     describe("Required Fields", function() {
       var specialFields = ['email', 'password'];
       var fields = reqFields.filter(function(v) { return specialFields.indexOf(v) === -1; });
@@ -325,6 +344,7 @@ describe("User Model", function() {
         done();
       });
     });
+
 
     it("should update the database with the user data passed", function(done) {
       User.find(john, function(findResp) {
