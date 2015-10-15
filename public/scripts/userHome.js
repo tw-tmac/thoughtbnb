@@ -4,9 +4,19 @@ var addAddress = function() {
     'description': $('#description').val()
   };
   $.post('/api/listings/', listing, function(data) {
-    asif = data;
+    if (data.error) {
+      $('#formError').text(data.error);
+      return false;
+    }
     updateListings();
+    resetListingForm();
   });
+};
+
+var resetListingForm = function() {
+  $('#location, #description').val('');
+  $('#formError').text('');
+
 };
 
 var updateListings = function() {
