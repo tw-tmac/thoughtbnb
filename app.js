@@ -40,7 +40,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Make the user session variable available to all templates
 app.use(function(req, res, next) {
   res.locals.user = req.session.user;
+  res.locals.toggles = CONFIG.toggles;
+
   res.locals.localMode = CONFIG.USE_LOCAL_ASSETS;
+  res.locals.googleMapsKey = CONFIG.GMAPKEY;
   next();
 });
 

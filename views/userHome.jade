@@ -6,9 +6,12 @@ h1= user.name
     .form-group
       label(for="location") Location
       .input-group
-        select#location.form-control
-          option(selected='selected', disabled='disabled')
-          include locationOptions
+        if (toggles.googlelocationsearch)
+          input#location.form-control
+        else
+          select#location.form-control
+            option(selected='selected', disabled='disabled')
+            include locationOptions
         span.input-group-addon
           span.glyphicon.glyphicon-map-marker
     .form-group
@@ -21,5 +24,7 @@ h1= user.name
     .panel-body
       h3 {{listing.location}}
       p {{listing.description}}
+if (toggles.googlelocationsearch)
+  script(async='async', defer='defer', src='https://maps.googleapis.com/maps/api/js?key='+googleMapsKey+'&libraries=places&callback=initLocationSearch')
 script(src="/scripts/userHome.js")
 script(src="/scripts/listingsController.js")
