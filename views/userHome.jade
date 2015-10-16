@@ -19,7 +19,6 @@ h1= user.name
     .panel-body
       h3 {{listing.location}}
       p {{listing.description}}
-if (toggles.googlelocationsearch)
-  script(async='async', defer='defer', src='https://maps.googleapis.com/maps/api/js?key='+googleMapsKey+'&libraries=places&callback=initLocationSearch')
+script(async='async', defer='defer', src='https://maps.googleapis.com/maps/api/js?key='+googleMapsKey+'&libraries=places&callback=initLocationSearch')
 script(src="/scripts/userHome.js")
 script(src="/scripts/listingsController.js")
