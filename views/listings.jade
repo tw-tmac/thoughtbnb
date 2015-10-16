@@ -3,7 +3,7 @@ extends layout
 block content
   h1=title
   #listings(ng-app="thoughtbnb", ng-controller="ListingsController")
-    .listing.panel.panel-default.col-xs-6.col-sm-4(ng-repeat="listing in listings")
+    .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings")
       .panel-body
         h3 {{listing.location}}
         p
