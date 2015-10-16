@@ -6,12 +6,7 @@ h1= user.name
     .form-group
       label(for="location") Location
       .input-group
-        if (toggles.googlelocationsearch)
-          input#location.form-control
-        else
-          select#location.form-control
-            option(selected='selected', disabled='disabled')
-            include locationOptions
+        input#location.form-control
         span.input-group-addon
           span.glyphicon.glyphicon-map-marker
     .form-group

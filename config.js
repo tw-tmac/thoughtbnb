@@ -8,7 +8,6 @@ var CONFIG = {
   "GMAPKEY": process.env.GMAPKEY || "getyourownkey",
   "salt": process.env.SALT || "a3jcLj3kaB",
   "toggles": {
-    "googlelocationsearch": process.env.USEGPLACESEARCH || false
   }
 };
 
