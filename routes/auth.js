@@ -28,4 +28,22 @@ router.post('/auth/login', function(req, res) {
   });
 });
 
+
+/*
+ * All routes after this require a user to be logged in
+ */
+router.use(function(req, res, next) {
+  if (typeof req.session.user === "undefined") {
+    req.session.nextUrl = req.originalUrl;
+    var locals = {
+      'message': "You must be logged in",
+      'nextUrl': req.originalUrl
+    };
+    res.render('signin', locals);
+  }
+  else {
+    next();
+  }
+});
+
 module.exports = router;
