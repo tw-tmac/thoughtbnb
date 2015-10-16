@@ -1,6 +1,6 @@
 h1= user.name
 
-#newAddress.panel.panel-default.col-xs-6.col-sm-4
+#newAddress.panel.panel-default.col-xs-12.col-sm-4
   .panel-body
     p#formError.text-danger
     .form-group
@@ -20,7 +20,7 @@ h1= user.name
     .form-group
       button#btnAdd.btn.btn-primary Add
 #listings(ng-app="thoughtbnb", ng-controller="ListingsController")
-  .listing.panel.panel-default.col-xs-6.col-sm-4(ng-repeat="listing in listings")
+  .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings")
     .panel-body
       h3 {{listing.location}}
       p {{listing.description}}
