@@ -39,7 +39,7 @@ router.use(function(req, res, next) {
       'message': "You must be logged in",
       'nextUrl': req.originalUrl
     };
-    res.render('signin', locals);
+    res.status(403).render('signin', locals);
   }
   else {
     next();
