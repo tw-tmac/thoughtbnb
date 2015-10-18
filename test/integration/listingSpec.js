@@ -58,7 +58,7 @@ describe("Listing Model", function() {
           description: "Best place ever!"
         };
         Listing.create(listingData, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           resp.data.listings.length.should.equal(1);
           resp.data.listings[0].user.should.equal(listingData.user);
           done();
@@ -95,7 +95,7 @@ describe("Listing Model", function() {
     it("should return zero listings when no listings exist", function(done) {
       emptyDoc(function() {
         Listing.search({}, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           resp.data.listings.length.should.equal(0);
           done();
         });
