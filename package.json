@@ -19,7 +19,10 @@
     "mongoose": "~4.0.0",
     "express-session": "^1.11.3",
     "connect-mongo": "^0.8.2",
-    "mongoose-auto-increment": "~4.0.0"
+    "mongoose-auto-increment": "~4.0.0",
+    "nodemailer-mandrill-transport": "^0.3.0",
+    "nodemailer": "^1.8.0",
+    "nodemailer-smtp-transport": "^1.0.3"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
@@ -27,6 +30,7 @@
     "grunt-simple-mocha": "~0.4.0",
     "should": "~7.1.0",
     "istanbul": "^0.3.22",
-    "mocha": "^2.3.3"
+    "mocha": "^2.3.3",
+    "nodemailer-mock-transport": "^1.1.0"
   }
 }
