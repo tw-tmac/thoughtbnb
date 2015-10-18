@@ -54,8 +54,7 @@ describe("User Model", function() {
 
     it("should return the user when there are no errors", function(done) {
       User.register(bob, function(resp) {
-        (resp.error === null).should.be.ok;
-        (typeof resp.data.users.length).should.equal("number");
+        should.not.exist(resp.error);
         resp.data.users.length.should.equal(1);
         resp.data.users[0].name.should.equal(bob.name);
         done();
@@ -64,7 +63,7 @@ describe("User Model", function() {
 
     it("should generate token", function(done) {
       User.register(bob, function(resp) {
-        (resp.error === null).should.be.ok;
+        should.not.exist(resp.error);
         resp.data.users[0].token.should.not.equal(null);
         done();
       });
@@ -72,7 +71,7 @@ describe("User Model", function() {
 
     it("should activate user with a token", function(done) {
       User.register(bob, function(resp) {
-        (resp.error === null).should.be.ok;
+        should.not.exist(resp.error);
         User.activateUser(resp.data.users[0].token, function(activateResponse){
           activateResponse.data.users[0].isActive.should.be.true;
         });
@@ -88,7 +87,7 @@ describe("User Model", function() {
         it("should save "+field, function(done) {
           bob[field] = "TestValue";
           User.register(bob, function(resp) {
-            (resp.error === null).should.be.ok;
+            should.not.exist(resp.error);
             var obj = {};
             obj[field] = "TestValue";
             User.model.count(obj, function(err, count) {
@@ -104,7 +103,7 @@ describe("User Model", function() {
         john.password = "TestPassword";
         john.cpassword = "TestPassword";
         User.register(john, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           var encryptedPw = resp.data.users[0].password;
           User.comparePassword(john.password, encryptedPw, function(err, same) {
             same.should.be.ok;
@@ -143,7 +142,7 @@ describe("User Model", function() {
       it("should return an error if not unique", function(done) {
         var bob = newBob(true);
         User.register(bob, function(response) {
-          (response.error === null).should.be.ok;
+          should.not.exist(response.error);
           User.register(bob, function(resp) {
             resp.error.should.equal(ERRORS.signup['email']['duplicate']);
             done();
@@ -237,7 +236,7 @@ describe("User Model", function() {
 
       it("should return all users when empty object is passed", function(done) {
         User.find({}, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           resp.data.users.length.should.equal(2);
           done();
         });
@@ -248,7 +247,7 @@ describe("User Model", function() {
 
       it("should return one user when sent one criterion matching one record", function(done) {
         User.find({ name: bob.name}, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           resp.data.users.length.should.equal(1);
           resp.data.users[0].name.should.equal(bob.name);
           done();
@@ -257,7 +256,7 @@ describe("User Model", function() {
 
       it("should two multiple users with one criterion matching two records", function(done) {
         User.find({ country: bob.country}, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           resp.data.users.length.should.equal(2);
           resp.data.users[0].name.should.equal(bob.name);
           resp.data.users[1].name.should.equal(james.name);
@@ -270,7 +269,7 @@ describe("User Model", function() {
 
       it("should return one user when sent criteria matching one record", function(done) {
         User.find({ name: bob.name, phone: bob.phone}, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           resp.data.users.length.should.equal(1);
           resp.data.users[0].name.should.equal(bob.name);
           resp.data.users[0].phone.should.equal(bob.phone);
@@ -280,7 +279,7 @@ describe("User Model", function() {
 
       it("should return two users with criteria matching two records", function(done) {
         User.find({ country: bob.country, zip: james.zip}, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           resp.data.users.length.should.equal(2);
           resp.data.users[0].name.should.equal(bob.name);
           resp.data.users[1].name.should.equal(james.name);
@@ -290,7 +289,7 @@ describe("User Model", function() {
 
       it("should return one user with a user passed as the criteria", function(done) {
         User.find(bob, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           resp.data.users.length.should.equal(1);
           resp.data.users[0].name.should.equal(bob.name);
           done();
@@ -352,7 +351,7 @@ describe("User Model", function() {
         john.phone = "3125551234";
 
         User.update(john, function(updateResp) {
-          (updateResp.error === null).should.be.ok;
+          should.not.exist(updateResp.error);
 
           var match = true;
           for (var field in john)
@@ -427,7 +426,7 @@ describe("User Model", function() {
         john._id = findResp.data.users[0].id;
 
         User.remove({_id: john._id}, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           User.model.count({}, function(err, count) {
             // Only Bob should be left
             count.should.equal(1);
@@ -442,7 +441,7 @@ describe("User Model", function() {
         john._id = findResp.data.users[0].id;
 
         User.remove(john, function(resp) {
-          (resp.error === null).should.be.ok;
+          should.not.exist(resp.error);
           User.model.count({}, function(err, count) {
             // Only Bob should be left
             count.should.equal(1);
@@ -478,7 +477,7 @@ describe("Authentication", function() {
       password: bob.password
     };
     User.authenticate(bobby, function(resp) {
-      (resp.error === null).should.be.ok;
+      should.not.exist(resp.error);
       resp.data.should.have.property('user');
       resp.data.user.name.should.equal(bob.name);
       done();
