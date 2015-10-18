@@ -462,7 +462,9 @@ describe("Authentication", function() {
     emptyDoc(function() {
       User.register(bob, function(resp) {
         delete bob.cpassword;
-        done();
+        User.activateUser(resp.data.users[0].token, function(resp2) {
+          done();
+        });
       });
     });
   });
@@ -496,16 +498,18 @@ describe("Authentication", function() {
     });
   });
 
-  it("should return an error if the user is activated", function(done) {
+  it("should return an error if the user is not activated", function(done) {
+    bob = newBob(true);
     var bobby = {
       email: bob.email,
       password: bob.password,
-      isActive: false
     };
-    User.authenticate(bobby, function(resp) {
-      resp.should.have.property('error');
-      resp.error.should.equal(ERRORS.auth['notActive']);
-      done();
+    User.register(bob, function() {
+      User.authenticate(bobby, function(resp) {
+        resp.should.have.property('error');
+        resp.error.should.equal(ERRORS.auth['notActive']);
+        done();
+      });
     });
   });
 
