@@ -26,7 +26,7 @@ router.get('/signout', function(req, res) {
   });
 });
 
-router.get('/confirmation', function(req, res) {
+router.get('/signup/confirmation', function(req, res) {
   res.render('confirmation', { title: "Confirmation" });
 });
 

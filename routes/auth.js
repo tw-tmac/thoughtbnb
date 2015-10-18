@@ -8,9 +8,9 @@ var respond = function(res, result) {
   res.send(JSON.stringify(result));
 };
 
-router.get('/activate/:token', function(req, res) {
+router.get('/confirm/:token', function(req, res) {
     User.activateUser(req.params.token);
-    res.send("Account has been succesfully activated!");
+    res.send("Account has been succesfully confirmed!");
   });
 
 
