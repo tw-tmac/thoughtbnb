@@ -174,4 +174,60 @@ describe("Listing Model", function() {
       });
     });
   });
+
+  describe("Edit", function() {
+    it("should update the listing with new values", function(done) {
+      User.register(newBob(true), function(resp1) {
+        var user = resp1.data.users[0];
+        var listingData = {
+          'user': user._id,
+          'location': "A",
+          'description': "1"
+        };
+        Listing.create(listingData, function(resp2) {
+
+          var updatedData = {
+            '_id': resp2.data.listings[0]._id,
+            'user': user._id,
+            'location': "B",
+            'description': "2"
+          };
+          Listing.edit(updatedData, function(resp3) {
+            should.not.exist(resp3.error);
+            Listing.search({'_id': resp2.data.listings[0]._id}, function(resp) {
+              resp.data.listings.length.should.equal(1);
+              resp.data.listings[0].location.should.equal(updatedData.location);
+              done();
+            });
+          });
+
+        });
+      });
+    });
+
+    it("should return an error if listing id is not specified", function(done) {
+      User.register(newBob(true), function(resp1) {
+        var user = resp1.data.users[0];
+        var listingData = {
+          'user': user._id,
+          'location': "A",
+          'description': "1"
+        };
+        Listing.create(listingData, function() {
+
+          var updatedData = {
+            'user': user._id,
+            'location': "B",
+            'description': "2"
+          };
+
+          Listing.edit(updatedData, function(resp) {
+            resp.error.should.equal(ERRORS.listing._id.missing);
+            done();
+          });
+
+        });
+      });
+    });
+  });
 });

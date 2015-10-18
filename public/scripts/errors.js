@@ -37,6 +37,9 @@ var ERRORS = (function() {
     },
     'user': {
       'name': "user id"
+    },
+    '_id': {
+      'name': "listing id"
     }
   };
 

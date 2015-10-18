@@ -56,8 +56,8 @@ module.exports = function(mongoose) {
       listing.save(function(err) {
         resp = new Resp({
           'listings': [listing],
-          'error': err
         });
+        resp.error = err;
         return respond(resp, cb);
       });
     }
@@ -73,6 +73,20 @@ module.exports = function(mongoose) {
       resp = new Resp({
         'listings': listings
       });
+      return respond(resp, cb);
+    });
+  };
+
+  self.edit = function(listingData, cb) {
+    var resp = new Resp();
+    var id = listingData._id;
+    delete listingData._id;
+    if (typeof id === "undefined") {
+      resp.error = ERRORS.listing._id.missing;
+      return respond(resp, cb);
+    }
+    Listing.findByIdAndUpdate(id, listingData, {'new': true}, function(err, listing) {
+      resp = new Resp({listings: [listing]});
       return respond(resp, cb);
     });
   };
