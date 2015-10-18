@@ -66,6 +66,21 @@ describe("Listing Model", function() {
       });
     });
 
+    it("should create a listing that is available by default", function(done) {
+      User.register(bob, function(response) {
+        var listingData = {
+          user: response.data.users[0]._id,
+          location: 'Wilmington, Delaware',
+          description: "Best place ever!"
+        };
+        Listing.create(listingData, function(resp) {
+          should.not.exist(resp.error);
+          resp.data.listings[0].available.should.be.ok;
+          done();
+        });
+      });
+    });
+
     it("should return an error if the location is not specified", function(done) {
       User.register(bob, function(response) {
         var listingData = {
