@@ -8,6 +8,12 @@ var respond = function(res, result) {
   res.send(JSON.stringify(result));
 };
 
+router.get('/activate/:token', function(req, res) {
+    User.activateUser(req.params.token);
+    res.send("Account has been succesfully activated!");
+  });
+
+
 /* POST new user. */
 router.post('/auth/register', function(req, res) {
   User.register(req.body, function(data) {
