@@ -324,9 +324,14 @@ module.exports = function(mongoose) {
         resp.error = ERRORS.auth['notFound'];
         return respond(resp, cb);
       }
+
       comparePassword(user.password, result.password, function(err, isMatch) {
         if (isMatch) {
           resp.data = { user: result };
+          if(!result.isActive){
+            resp.error = ERRORS.auth['notActive'];
+            return respond(resp, cb);
+          }
         }
         else {
           resp.error = ERRORS.auth['wrongPassword'];

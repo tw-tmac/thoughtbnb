@@ -29,8 +29,6 @@ var signUp = function() {
       $('#formError').text(data.error);
       return false;
     }
-    signin();
-  });
+    window.location.href = "/confirmation";  });
 };
-
 $('#btnSignup').on('click', signUp);

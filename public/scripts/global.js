@@ -1,5 +1,5 @@
 var signin = function() {
-  var userData = {
+var userData = {
     email: $('#email').val(),
     password: $('#password').val()
   };
@@ -12,4 +12,3 @@ var signin = function() {
     }
   });
 };
-

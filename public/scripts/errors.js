@@ -27,7 +27,8 @@ var ERRORS = (function() {
 
   self.auth = {
     'notFound': "The email provided is not registered.",
-    'wrongPassword': "The password provided is incorrect."
+    'wrongPassword': "The password provided is incorrect.",
+    'notActive' : "The account is not active"
   };
 
   self.listing = {

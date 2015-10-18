@@ -497,6 +497,19 @@ describe("Authentication", function() {
     });
   });
 
+  it("should return an error if the user is activated", function(done) {
+    var bobby = {
+      email: bob.email,
+      password: bob.password,
+      isActive: false
+    };
+    User.authenticate(bobby, function(resp) {
+      resp.should.have.property('error');
+      resp.error.should.equal(ERRORS.auth['notActive']);
+      done();
+    });
+  });
+
   it("should return an error when the password is incorrect", function(done) {
     var bobby = {
       email: bob.email,
