@@ -2,6 +2,7 @@ var router = require('express').Router();
 
 var DB = require('../models/db');
 var User = require('../models/User')(DB.mongoose);
+var Email = require('../models/Email');
 
 var respond = function(res, result) {
   res.contentType('application/json');
@@ -17,6 +18,18 @@ router.get('/confirm/:token', function(req, res) {
 /* POST new user. */
 router.post('/auth/register', function(req, res) {
   User.register(req.body, function(data) {
+    if (!data.error) {
+      var user = data.data.users[0];
+      var baseUrl = req.protocol + "://" + req.get('host');
+      var confirmationUrl = baseUrl + "/confirm/" + user.token;
+      var email = new Email();
+      email.to = user.email;
+      email.from = "ThoughtBnB <no-reply@thoughtbnb.com>";
+      email.subject = "Welcome to ThoughtBnB! Please Confirm Your Accounts";
+      email.template('./views/emails/confirmation.jade', {user: user, link: confirmationUrl});
+      email.send(console.log);
+    }
+    //Async on purpose
     respond(res, data);
   });
 });

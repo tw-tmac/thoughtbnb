@@ -27,7 +27,7 @@ router.get('/signout', function(req, res) {
 });
 
 router.get('/signup/confirmation', function(req, res) {
-  res.render('confirmation', { title: "Confirmation" });
+  res.render('confirmation', { title: "Confirmation", activeLink: 'signin' });
 });
 
 module.exports = router;

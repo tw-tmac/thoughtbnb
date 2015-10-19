@@ -29,6 +29,6 @@ var signUp = function() {
       $('#formError').text(data.error);
       return false;
     }
-    window.location.href = "/confirmation";  });
+    window.location.href = "/signup/confirmation";  });
 };
 $('#btnSignup').on('click', signUp);
