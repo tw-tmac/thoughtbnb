@@ -29,7 +29,7 @@
     "grunt-contrib-jshint": "~0.11.3",
     "grunt-simple-mocha": "~0.4.0",
     "should": "~7.1.0",
-    "istanbul": "^0.3.22",
+    "istanbul": "^0.4.0",
     "mocha": "^2.3.3",
     "nodemailer-mock-transport": "^1.1.0"
   }
