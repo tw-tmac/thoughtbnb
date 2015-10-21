@@ -11,7 +11,7 @@ var respond = function(res, result) {
 
 router.get('/confirm/:token', function(req, res) {
     User.activateUser(req.params.token);
-    res.send("Account has been succesfully confirmed!");
+    res.render('activate', {title: "Account Activated"});
   });
 
 

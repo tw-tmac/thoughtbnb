@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 Welcome to ThoughtBnB! Your email has now been confirmed.
+  script(type='text/javascript')
+    | window.setTimeout(function(){
+    |    window.location.href = "/signin";
+    |}, 3000);
