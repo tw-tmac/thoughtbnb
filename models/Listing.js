@@ -85,7 +85,9 @@ module.exports = function(mongoose) {
       resp.error = ERRORS.listing._id.missing;
       return respond(resp, cb);
     }
-    Listing.findByIdAndUpdate(id, listingData, {'new': true}, function(err, listing) {
+    console.log('updating by id', id);
+    Listing.findByIdAndUpdate(id, { '$set': listingData}, {'new': true}, function(err, listing) {
+      console.log('fbi', err,listing);
       resp = new Resp({listings: [listing]});
       return respond(resp, cb);
     });

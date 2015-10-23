@@ -43,4 +43,11 @@ router.get('/:id', function(req, res) {
   });
 });
 
+router.patch('/:id', function(req, res) {
+  req.body._id = req.params.id;
+  Listing.edit(req.body, function(resp) {
+    respond(res, resp);
+  });
+});
+
 module.exports = router;
