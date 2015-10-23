@@ -35,4 +35,12 @@ router.get('/me', function(req, res) {
   });
 });
 
+router.get('/:id', function(req, res) {
+  Listing.search({
+    _id: req.params.id
+  }, function(resp) {
+    respond(res, resp);
+  });
+});
+
 module.exports = router;
