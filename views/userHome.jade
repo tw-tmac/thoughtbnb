@@ -1,24 +1,25 @@
-h1= user.name
+div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
+  h1= user.name
 
-#newAddress.panel.panel-default.col-xs-12.col-sm-4
-  .panel-body
-    p#formError.text-danger
-    .form-group
-      label(for="location") Location
-      .input-group
-        input#location.form-control
-        span.input-group-addon
-          span.glyphicon.glyphicon-map-marker
-    .form-group
-      label(for="description") Description
-      textarea#description.form-control(placeholder="Description")
-    .form-group
-      button#btnAdd.btn.btn-primary Add
-#listings(ng-app="thoughtbnb", ng-controller="ListingsController")
-  .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings")
+  #newAddress.panel.panel-default.col-xs-12.col-sm-4
     .panel-body
-      h3 {{listing.location}}
-      p {{listing.description}}
+      p#formError.text-danger {{formError}}
+      .form-group
+        label(for="location") Location
+        .input-group
+          input#location.form-control(ng-model="controller.newLocation")
+          span.input-group-addon
+            span.glyphicon.glyphicon-map-marker
+      .form-group
+        label(for="description") Description
+        textarea#description.form-control(placeholder="Description", ng-model="controller.newDescription")
+      .form-group
+        button#btnAdd.btn.btn-primary(ng-click="controller.add()") Add
+  #listings
+    .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings")
+      .panel-body
+        h3 {{listing.location}}
+        p {{listing.description}}
 script(async='async', defer='defer', src='https://maps.googleapis.com/maps/api/js?key='+googleMapsKey+'&libraries=places&callback=initLocationSearch')
 script(src="/scripts/userHome.js")
 script(src="/scripts/listingsController.js")
