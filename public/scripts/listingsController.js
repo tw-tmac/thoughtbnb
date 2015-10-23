@@ -6,7 +6,7 @@ app.controller('ListingsController', function($scope, $http) {
   $scope.formError = "";
 
   controller.getAll = function() {
-    $http.get('/api/listings').success(function(response) {
+    $http.get('/api/listings/me').success(function(response) {
      $scope.listings = response.data.listings;
     });
   };
@@ -15,11 +15,13 @@ app.controller('ListingsController', function($scope, $http) {
     $scope.formError = "";
     controller.newLocation = "";
     controller.newDescription = "";
+    controller.newAvailable = true;
     controller.currentListing = null;
-      controller.editing = false;
+    controller.editing = false;
   };
 
   controller.add = function() {
+    controller.newLocation = $('#location').val();
     var listingData = {
       location: controller.newLocation,
       description: controller.newDescription
@@ -38,10 +40,12 @@ app.controller('ListingsController', function($scope, $http) {
   controller.editing = false;
 
   controller.update = function() {
+    controller.newLocation = $('#location').val();
     var listingPatch = {
       '_id': controller.currentListing._id,
       'location': controller.newLocation,
-      'description': controller.newDescription
+      'description': controller.newDescription,
+      'available': controller.newAvailable
     };
     $http.patch('/api/listings/'+listingPatch._id, listingPatch).then(function(response) {
       if (response.data.error) {
@@ -56,15 +60,18 @@ app.controller('ListingsController', function($scope, $http) {
   controller.edit = function(id) {
     $http.get('/api/listings/'+id).then(function(response) {
       controller.currentListing = response.data.data.listings[0];
+      asif = controller.currentListing;
       controller.currentListing.user = controller.currentListing.user._id;
       controller.newLocation = controller.currentListing.location;
       controller.newDescription = controller.currentListing.description;
+      controller.newAvailable = controller.currentListing.available;
       controller.editing = true;
       $('#description').focus();
     });
   };
 
   angular.element(document).ready(function () {
+    controller.resetForm();
     controller.getAll();
   });
 

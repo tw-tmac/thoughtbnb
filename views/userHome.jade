@@ -14,6 +14,11 @@ div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
         label(for="description") Description
         textarea#description.form-control(placeholder="Description", ng-model="controller.newDescription")
       .form-group
+        .checkbox
+          label
+            input#available(type="checkbox", ng-model="controller.newAvailable")
+            | Visible
+      .form-group
         button#btnAdd.btn.btn-primary(ng-click="controller.add()", ng-hide="controller.editing") Add
         button#btnEdit.btn.btn-primary(ng-click="controller.update()", ng-show="controller.editing") Update
         button#btnCancel.btn.btn-default(ng-click="controller.resetForm()", ng-show="controller.editing") Cancel
@@ -22,6 +27,8 @@ div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
       .panel-body
         h3 {{listing.location}}
         p {{listing.description}}
+        p
+          i {{(listing.available) ? "" : "Not "}}Visible
         button(ng-click="controller.edit(listing._id)") edit
 script(async='async', defer='defer', src='https://maps.googleapis.com/maps/api/js?key='+googleMapsKey+'&libraries=places&callback=initLocationSearch')
 script(src="/scripts/userHome.js")

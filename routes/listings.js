@@ -22,7 +22,7 @@ router.post('/', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-  Listing.search({}, function(resp) {
+  Listing.search({available: true}, function(resp) {
     respond(res, resp);
   });
 });
