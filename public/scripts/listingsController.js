@@ -6,6 +6,12 @@ app.controller('ListingsController', function($scope, $http) {
   $scope.formError = "";
 
   controller.getAll = function() {
+    $http.get('/api/listings').success(function(response) {
+     $scope.listings = response.data.listings;
+    });
+  };
+
+  controller.getMyListings = function() {
     $http.get('/api/listings/me').success(function(response) {
      $scope.listings = response.data.listings;
     });
@@ -31,7 +37,7 @@ app.controller('ListingsController', function($scope, $http) {
         $scope.formError = response.data.error;
         return false;
       }
-      controller.getAll();
+      controller.getMyListings();
       controller.resetForm();
     });
   };
@@ -52,7 +58,7 @@ app.controller('ListingsController', function($scope, $http) {
         $scope.formError = response.data.error;
         return false;
       }
-      controller.getAll();
+      controller.getMyListings();
       controller.resetForm();
     });
   };
@@ -70,9 +76,9 @@ app.controller('ListingsController', function($scope, $http) {
     });
   };
 
-  angular.element(document).ready(function () {
+  controller.initUserHome = function() {
     controller.resetForm();
-    controller.getAll();
-  });
+    controller.getMyListings();
+  };
 
 });
