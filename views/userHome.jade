@@ -14,12 +14,15 @@ div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
         label(for="description") Description
         textarea#description.form-control(placeholder="Description", ng-model="controller.newDescription")
       .form-group
-        button#btnAdd.btn.btn-primary(ng-click="controller.add()") Add
+        button#btnAdd.btn.btn-primary(ng-click="controller.add()", ng-hide="controller.editing") Add
+        button#btnEdit.btn.btn-primary(ng-click="controller.update()", ng-show="controller.editing") Update
+        button#btnCancel.btn.btn-default(ng-click="controller.resetForm()", ng-show="controller.editing") Cancel
   #listings
     .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings")
       .panel-body
         h3 {{listing.location}}
         p {{listing.description}}
+        button(ng-click="controller.edit(listing._id)") edit
 script(async='async', defer='defer', src='https://maps.googleapis.com/maps/api/js?key='+googleMapsKey+'&libraries=places&callback=initLocationSearch')
 script(src="/scripts/userHome.js")
 script(src="/scripts/listingsController.js")
