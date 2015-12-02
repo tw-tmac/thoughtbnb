@@ -12,3 +12,124 @@ body
 {
 	margin: 5px;
 }
+
+
+/* Log in form/page styling. Smooches, Coleman */
+#log-in {
+  font-family: helvetica;
+  color: #333;
+  padding: 0 15px;
+}
+#log-in * {
+  box-sizing: border-box;
+}
+#log-in .login-heading {
+  font-size: 36px;
+  line-height: 1.5;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+  margin-top: 0;
+}
+#log-in .login-copy {
+  text-align: center;
+  margin-bottom: 30px;
+}
+#log-in .login-form {
+  margin: 60px auto;
+  display: block;
+  padding: 20px 30px 30px 30px;
+  max-width: 480px;
+  background: #ededed;
+  border-radius: 8px;
+  box-shadow: 0 2px 0 1px rgba(0, 0, 0, 0.1);
+}
+#log-in .login-form .field-container {
+  position: relative;
+  display: block;
+  margin: 10px 0;
+  height: 54px;
+  width: 100%;
+  background: white;
+  border: #f0f;
+  border-radius: 3px;
+}
+#log-in .login-form .field-container.-focused label {
+  font-size: 11px;
+  line-height: 12px;
+  color: #888;
+  bottom: auto;
+  top: 8px;
+  font-weight: bold;
+}
+#log-in .login-form .field-container.-focused input {
+  line-height: 62px;
+}
+#log-in .login-form label {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  left: 10px;
+  z-index: 1;
+  line-height: 54px;
+  display: block;
+  color: #666;
+  font-size: 16px;
+  font-weight: normal;
+  transition: font-size 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), line-height 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), font-weight 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), top 0.2s cubic-bezier(0.645, 0.045, 0.355, 1), bottom 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+#log-in .login-form input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 2;
+  display: block;
+  background: transparent;
+  line-height: 54px;
+  padding: 0 10px;
+  font-size: 16px;
+  border: none;
+  color: #333;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+#log-in .login-form input:focus, #log-in .login-form input:active {
+  outline: none;
+  border-color: #ededed;
+}
+#log-in .login-form button {
+  display: block;
+  margin: 30px 0;
+  height: 54px;
+  width: 100%;
+  background: #33cc77;
+  border: 1px solid #33cc77;
+  border-top-color: transparent;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: -1px -1px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+#log-in .login-form button:hover {
+  background: #5cd692;
+  cursor: pointer;
+}
+#log-in .login-form .create-account-link {
+  font-weight: normal;
+  color: #085DA9;
+  font-size: 14px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  transition: color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+#log-in .login-form .create-account-link:hover {
+  color: #0094CC;
+}
