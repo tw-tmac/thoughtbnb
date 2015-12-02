@@ -1,6 +1,11 @@
-h1= title
-p Welcome to #{title}
-p Think of a place.  
-p ThoughtWorker might   
-p have a pad there.   
-p Ask. Be nice...
+form
+  h1.login-heading ThoughtBnB
+    p.login-copy A place for ThoughtWorkers to share space>
+      .field-container.-username
+        label(for="demo") E-mail
+        input(type="email",name="demo")
+      .field-container -password">
+        label(for="demo") Password
+        input(type="password",name="demo")
+      button class="log-in-button" type="submit">Log in</button>
+      a(href="") Don't have an account? Sign up
