@@ -1,5 +1,5 @@
 var signin = function() {
-var userData = {
+  var userData = {
     email: $('#email').val(),
     password: $('#password').val()
   };
@@ -8,7 +8,7 @@ var userData = {
       $('#pError').text(data.error);
     }
     else {
-      window.location.href = nextUrl || "/";
+      window.location.href = (typeof nextUrl !== "undefined") ? nextUrl : "/";
     }
   });
 };

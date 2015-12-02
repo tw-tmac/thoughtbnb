@@ -1,14 +1,15 @@
 #log-in
-  form.login-form
+  form.login-form(onsubmit="return false;")
     h1.login-heading ThoughtBnB
     p.login-copy A place for ThoughtWorkers to share space
     .field-container.-username
       label(for="email") E-mail
-      input(type="email",name="email")
+      input#email(type="email",name="email")
     .field-container.-password
       label(for="password") Password
-      input(type="password",name="password")
-    button.log-in-button(type="submit") Log in
+      input#password(type="password",name="password")
+    button#btnSignin.log-in-button Log in
     a.create-account-link(href="/signup") Don't have an account? Sign up
 
 script(src="/scripts/publicHome.js")
+script(src="/scripts/signin.js")
