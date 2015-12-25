@@ -1,0 +1,23 @@
+[
+  {
+    "city_code": "ATL",
+    "name": "Atlanta"
+  },
+  {
+    "city_code": "CHI",
+    "name": "Chicago"
+  },
+  {
+    "city_code": "DLS",
+    "name": "Dallas"
+  },
+  {
+    "city_code": "NYC",
+    "name": "New York"
+  },
+  {
+    "city_code": "SFO",
+    "name": "San Francisco"
+  }
+
+]

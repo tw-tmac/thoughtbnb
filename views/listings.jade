@@ -2,8 +2,16 @@ extends layout
 
 block content
   h1=title
+
   #listings(ng-app="thoughtbnb", ng-controller="ListingsController")
-    .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings")
+    div
+      #btnSignin.btn.btn-primary(ng-click="search_location = {location: 'Atlanta'}") Atlanta
+      #btnSignin.btn.btn-primary(ng-click="search_location = {location: 'Chicago'}") Chicago
+      #btnSignin.btn.btn-primary(ng-click="search_location = {location: 'Dallas'}") Dallas
+      #btnSignin.btn.btn-primary(ng-click="search_location = {location: 'New York'}") New York
+      #btnSignin.btn.btn-primary(ng-click="search_location = {location: 'San Francisco'}") San Francisco
+      #btnSignin.btn.btn-primary(ng-click="search_location = {location: '!!'}") All
+    .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings | filter:search_location" )
       .panel-body
         h3 {{listing.location}}
         p

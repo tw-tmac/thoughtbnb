@@ -46,7 +46,7 @@ app.use(function(req, res, next) {
   res.locals.googleMapsKey = CONFIG.GMAPKEY;
   next();
 });
-
+//app.disable('etag');
 app.use('/', publicRoutes);
 app.use('/', auth);
 app.use('/api/listings', listings);

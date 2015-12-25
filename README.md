@@ -24,6 +24,7 @@ _It's exactly what you think it is._
 
 ##### Start application
 ```
+vagrant plugin install vagrant-cachier
 vagrant up
 vagrant ssh
 cd /vagrant
@@ -53,4 +54,3 @@ Start mongodb, then
 npm install
 npm start
 ```
-
