@@ -26,9 +26,9 @@ var ERRORS = (function() {
   };
 
   self.auth = {
-    'notFound': "The email provided is not registered.",
-    'wrongPassword': "The password provided is incorrect.",
-    'notActive' : "The account is not active"
+    'notFound': "The username or password provided is incorrect.",
+    'wrongPassword': "The username or password provided is incorrect.",
+    'notActive' : "The account is not active. Please check your email for the activation link."
   };
 
   self.listing = {

@@ -8,7 +8,9 @@
     .field-container.-password
       label(for="password") Password
       input#password(type="password",name="password")
+    p#pError.text-danger=message
     button#btnSignin.log-in-button Log in
+
     a.create-account-link(href="/signup") Don't have an account? Sign up
 
 script(src="/scripts/publicHome.js")
