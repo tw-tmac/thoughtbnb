@@ -51,7 +51,7 @@ app.use(function(req, res, next) {
 app.use('/', publicRoutes);
 app.use('/', auth);
 app.use('/api/listings', listings);
-app.use('/api/cities', cities)
+app.use('/api/cities', cities);
 app.use('/', privateRoutes);
 
 // catch 404 and forward to error handler
