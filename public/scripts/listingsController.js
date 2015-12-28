@@ -1,4 +1,3 @@
-var app = angular.module('thoughtbnb', []);
 app.controller('ListingsController', function($scope, $http) {
   var controller = this;
 
@@ -8,6 +7,12 @@ app.controller('ListingsController', function($scope, $http) {
   controller.getAll = function() {
     $http.get('/api/listings').success(function(response) {
      $scope.listings = response.data.listings;
+    });
+  };
+
+  controller.getAllCities = function() {
+    $http.get('/api/cities').success(function(response) {
+     $scope.cities = response.data.cities;
     });
   };
 
@@ -79,6 +84,8 @@ app.controller('ListingsController', function($scope, $http) {
   controller.initUserHome = function() {
     controller.resetForm();
     controller.getMyListings();
+    controller.getAllCities();
+
   };
 
 });

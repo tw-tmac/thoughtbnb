@@ -1,3 +1,4 @@
+var app = angular.module('thoughtbnb', []);
 var signin = function() {
   var userData = {
     email: $('#email').val(),
