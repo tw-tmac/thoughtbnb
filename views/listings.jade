@@ -5,7 +5,7 @@ block content
   div(ng-app="thoughtbnb")
     #listings(ng-controller="ListingsController" ng-init="cities=['Atlanta','Chicago','Dallas', 'New York', 'San Francisco']")
      div
-      #btnSignin.btn.btn-primary.citiesBtn(ng-click="$parent.search.location = city;", ng-repeat="city in cities") {{city}}
+      #btnSignin.btn.btn-primary.citiesBtn(ng-class="{'active':search.location === '{{city}}'}" ng-click="$parent.search.location = city;", ng-repeat="city in cities") {{city}}
       #btnSignin.btn.btn-primary(ng-click="search.location = '!!'") All locations
      .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings | filter:search" )
        .panel-body
