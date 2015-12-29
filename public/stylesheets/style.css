@@ -1,3 +1,6 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak, .ng-hide {
+    display: none !important;
+}
 body
 {
 	padding-top: 50px;
@@ -16,6 +19,17 @@ body
 .citiesBtn
 {
 	margin: 3px;
+}
+
+p.helperText
+{
+	line-height:10px;
+	margin-top:-6px
+}
+
+span.helperText
+{
+	font-size:10px
 }
 
 /* Log in form/page styling. Smooches, Coleman */
