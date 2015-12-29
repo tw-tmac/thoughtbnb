@@ -84,8 +84,6 @@ app.controller('ListingsController', function($scope, $http) {
   controller.initUserHome = function() {
     controller.resetForm();
     controller.getMyListings();
-    controller.getAllCities();
-
   };
 
 });
