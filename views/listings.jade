@@ -1,18 +1,23 @@
 extends layout
 
 block content
-  h1=title
   div(ng-app="thoughtbnb")
-    #listings(ng-controller="ListingsController" ng-init="cities=['Atlanta','Chicago','Dallas', 'New York', 'San Francisco']")
-     div
-      #btnSignin.btn.btn-primary.citiesBtn(ng-class="{'active':search.location === '{{city}}'}" ng-click="$parent.search.location = city;", ng-repeat="city in cities") {{city}}
-      #btnSignin.btn.btn-primary(ng-click="search.location = '!!'") All locations
-     .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings | filter:search" )
-       .panel-body
-         h3 {{listing.location}}
-         p
-           a(href="mailto:{{listing.user.email}}") {{listing.user.name}}
-         p {{listing.description}}  
+    #listings(ng-controller="ListingsController" ng-init="cities=['Atlanta','Chicago','Dallas', 'New York', 'San Francisco']; showListing=false; isCollasped=true")
+     div#cities
+      h3 Where would you like to go?
+      #btnSignin.btn.btn-primary.citiesBtn(ng-class="{'active':search.location === '{{city}}'}" ng-click="$parent.search.location = city; $parent.showListing=true", ng-repeat="city in cities") {{city}}
+      #btnSignin.btn.btn-primary(ng-click="search.location = '!!'; showListing=true") Anywhere!
+     div#listings(ng-show="showListing")
+      h4 These ThoughtWorkers might be able to house you...
+      .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings | filter:search" )
+        .panel-body
+          h4(ng-cloak) {{listing.user.name}}: {{listing.location}}
+          a(href="#" ng-click="isCollasped=false; hide=true" ng-hide="hide") more details
+          div(uib-collapse="isCollasped")
+            p(ng-cloak) {{listing.description}}
+            p
+              a(href="mailto:{{listing.user.email}}" ng-cloak) Email host
+            a(href="#" ng-click="isCollasped=true; hide=false") close 
          
   script(src="/scripts/listingsController.js")
   script(src="/scripts/listings.js")

@@ -3,15 +3,19 @@ div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
 
   #newAddress.panel.panel-default.col-xs-12.col-sm-4
     .panel-body
-      p#formError.text-danger {{formError}}
+      p(ng-cloak)#formError.text-danger {{formError}}
       .form-group
         label(for="location") Location
+        p.helperText
+          span.helperText Which city are you living in?
         .input-group
           input#location.form-control(ng-model="controller.newLocation")
           span.input-group-addon
             span.glyphicon.glyphicon-map-marker
       .form-group
         label(for="description") Description
+        p.helperText
+          span.helperText Give more details about your place (e.g. Close to public transit station, futon or bed, etc)
         textarea#description.form-control(placeholder="Description", ng-model="controller.newDescription")
       .form-group
         .checkbox
@@ -25,10 +29,10 @@ div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
   #listings
     .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings")
       .panel-body
-        h3 {{listing.location}}
-        p {{listing.description}}
+        h3(ng-cloak) {{listing.location}}
+        p(ng-cloak) {{listing.description}}
         p
-          i {{(listing.available) ? "" : "Not "}}Visible
+          i(ng-cloak) {{(listing.available) ? "" : "Not "}}Visible
         button(ng-click="controller.edit(listing._id)") edit
 script(async='async', defer='defer', src='https://maps.googleapis.com/maps/api/js?key='+googleMapsKey+'&libraries=places&callback=initLocationSearch')
 script(src="/scripts/userHome.js")
