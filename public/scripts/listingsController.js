@@ -26,6 +26,7 @@ app.controller('ListingsController', function($scope, $http) {
     $scope.formError = "";
     controller.newLocation = "";
     controller.newDescription = "";
+    controller.newTagline = "";
     controller.newAvailable = true;
     controller.currentListing = null;
     controller.editing = false;
@@ -33,9 +34,11 @@ app.controller('ListingsController', function($scope, $http) {
 
   controller.add = function() {
     controller.newLocation = $('#location').val();
+
     var listingData = {
       location: controller.newLocation,
-      description: controller.newDescription
+      description: controller.newDescription,
+      tagline: controller.newTagline
     };
     var request = $http.post('/api/listings', listingData).then(function(response) {
       if (response.data.error) {
@@ -52,11 +55,13 @@ app.controller('ListingsController', function($scope, $http) {
 
   controller.update = function() {
     controller.newLocation = $('#location').val();
+
     var listingPatch = {
       '_id': controller.currentListing._id,
       'location': controller.newLocation,
       'description': controller.newDescription,
-      'available': controller.newAvailable
+      'available': controller.newAvailable,
+      'tagline': controller.newTagline
     };
     $http.patch('/api/listings/'+listingPatch._id, listingPatch).then(function(response) {
       if (response.data.error) {
@@ -71,11 +76,12 @@ app.controller('ListingsController', function($scope, $http) {
   controller.edit = function(id) {
     $http.get('/api/listings/'+id).then(function(response) {
       controller.currentListing = response.data.data.listings[0];
-      asif = controller.currentListing;
+      //asif = controller.currentListing;
       controller.currentListing.user = controller.currentListing.user._id;
       controller.newLocation = controller.currentListing.location;
       controller.newDescription = controller.currentListing.description;
       controller.newAvailable = controller.currentListing.available;
+      controller.newTagline = controller.currentListing.tagline;
       controller.editing = true;
       $('#description').focus();
     });

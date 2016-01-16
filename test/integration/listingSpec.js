@@ -55,12 +55,15 @@ describe("Listing Model", function() {
         var listingData = {
           user: response.data.users[0]._id,
           location: 'Wilmington, Delaware',
-          description: "Best place ever!"
+          description: "Best place ever!",
+          tagline: "snazzy tagline"
         };
         Listing.create(listingData, function(resp) {
           should.not.exist(resp.error);
           resp.data.listings.length.should.equal(1);
           resp.data.listings[0].user.should.equal(listingData.user);
+          resp.data.listings[0].location.should.equal(listingData.location);
+          resp.data.listings[0].tagline.should.equal(listingData.tagline);
           done();
         });
       });
@@ -182,7 +185,8 @@ describe("Listing Model", function() {
         var listingData = {
           'user': user._id,
           'location': "A",
-          'description': "1"
+          'description': "1",
+          'tagline': "old tagline"
         };
         Listing.create(listingData, function(resp2) {
 
@@ -190,13 +194,16 @@ describe("Listing Model", function() {
             '_id': resp2.data.listings[0]._id,
             'user': user._id,
             'location': "B",
-            'description': "2"
+            'description': "2",
+            'tagline' : "new tagline"
           };
           Listing.edit(updatedData, function(resp3) {
             should.not.exist(resp3.error);
             Listing.search({'_id': resp2.data.listings[0]._id}, function(resp) {
               resp.data.listings.length.should.equal(1);
               resp.data.listings[0].location.should.equal(updatedData.location);
+              resp.data.listings[0].tagline.should.equal(updatedData.tagline);
+
               done();
             });
           });

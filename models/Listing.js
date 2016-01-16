@@ -22,6 +22,7 @@ module.exports = function(mongoose) {
     user: {type: Number, ref: 'User'},
     location: String,
     description: String,
+    tagline: String,
     available: {type: Boolean, default: true}
   });
   autoIncrement.initialize(mongoose);

@@ -5,6 +5,9 @@ div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
     .panel-body
       p(ng-cloak)#formError.text-danger {{formError}}
       .form-group
+        label(for="tagline") Tagline
+          input#tagline.form-control(ng-model="controller.newTagline")
+      .form-group
         label(for="location") Location
         p.helperText
           span.helperText Which part of town do you living in?
@@ -29,7 +32,8 @@ div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
   #listings
     .listing.panel.panel-default.col-xs-12.col-sm-5(ng-repeat="listing in listings")
       .panel-body
-        h3(ng-cloak) {{listing.location}}
+        h3(ng-cloak) {{listing.tagline}}
+        p(ng-cloak) {{listing.location}}
         p(ng-cloak) {{listing.description}}
         p
           i(ng-cloak) {{(listing.available) ? "" : "Not "}}Visible
