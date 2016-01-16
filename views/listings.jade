@@ -9,7 +9,7 @@ block content
       #btnSignin.btn.btn-primary(ng-click="search.location = '!!'; showListing=true") Anywhere!
      div#listings(ng-show="showListing")
       h4 These ThoughtWorkers might be able to house you...
-      .listing.panel.panel-default.col-xs-12.col-sm-4(ng-repeat="listing in listings | filter:search" )
+      .listing.panel.panel-default.col-sm-5(ng-repeat="listing in listings | filter:search" )
         .panel-body
           h4(ng-cloak) {{listing.user.name}}: {{listing.location}}
           a(href="#" ng-click="isCollasped=false; hide=true" ng-hide="hide") more details
@@ -18,6 +18,8 @@ block content
             p
               a(href="mailto:{{listing.user.email}}" ng-cloak) Email host
             a(href="#" ng-click="isCollasped=true; hide=false") close 
-         
+     div#details(ng-show="showListing")
+      .listing.panel.panel-default.col-sm-6
+        h4 details goes here
   script(src="/scripts/listingsController.js")
   script(src="/scripts/listings.js")
