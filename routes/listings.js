@@ -15,7 +15,9 @@ router.post('/', function(req, res) {
     'user': user._id,
     'location': req.body.location,
     'description': req.body.description,
-    'tagline': req.body.tagline
+    'tagline': req.body.tagline,
+    'type': req.body.type,
+    'quantity': req.body.quantity
   };
   Listing.create(listingData, function(resp) {
     respond(res, resp);

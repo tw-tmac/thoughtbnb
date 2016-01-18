@@ -38,7 +38,9 @@ app.controller('ListingsController', function($scope, $http) {
     var listingData = {
       location: controller.newLocation,
       description: controller.newDescription,
-      tagline: controller.newTagline
+      tagline: controller.newTagline,
+      type: controller.newType,
+      quantity: controller.newQuantity
     };
     var request = $http.post('/api/listings', listingData).then(function(response) {
       if (response.data.error) {
@@ -61,7 +63,9 @@ app.controller('ListingsController', function($scope, $http) {
       'location': controller.newLocation,
       'description': controller.newDescription,
       'available': controller.newAvailable,
-      'tagline': controller.newTagline
+      'tagline': controller.newTagline,
+      'type': controller.newType,
+      'quantity': controller.newQuantity
     };
     $http.patch('/api/listings/'+listingPatch._id, listingPatch).then(function(response) {
       if (response.data.error) {
@@ -82,6 +86,10 @@ app.controller('ListingsController', function($scope, $http) {
       controller.newDescription = controller.currentListing.description;
       controller.newAvailable = controller.currentListing.available;
       controller.newTagline = controller.currentListing.tagline;
+      controller.newType = controller.currentListing.type;
+      controller.newQuantity = controller.currentListing.quantity;
+
+
       controller.editing = true;
       $('#description').focus();
     });

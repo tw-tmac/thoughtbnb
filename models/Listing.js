@@ -23,6 +23,8 @@ module.exports = function(mongoose) {
     location: String,
     description: String,
     tagline: String,
+    quantity: Number,
+    type: String,
     available: {type: Boolean, default: true}
   });
   autoIncrement.initialize(mongoose);

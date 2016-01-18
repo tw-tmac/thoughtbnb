@@ -21,6 +21,14 @@ div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
           span.helperText Give more details about your place
         textarea#description.form-control(placeholder="e.g. Close to BART station, futon or bed, etc", ng-model="controller.newDescription")
       .form-group
+        label(for="features") Features
+        .input-group
+          input#quantity(ng-model="controller.newQuantity" size="2")
+          select(ng-model="controller.newType")
+            option(value="apartment") Apartment
+            option(value="bed/futon") Bed/Futon
+            option(value="room") Room
+      .form-group
         .checkbox
           label
             input#available(type="checkbox", ng-model="controller.newAvailable")
@@ -35,6 +43,7 @@ div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
         h3(ng-cloak) {{listing.tagline}}
         p(ng-cloak) {{listing.location}}
         p(ng-cloak) {{listing.description}}
+        p(ng-cloak) {{listing.quantity}} {{listing.type}}
         p
           i(ng-cloak) {{(listing.available) ? "" : "Not "}}Visible
         button(ng-click="controller.edit(listing._id)") edit
