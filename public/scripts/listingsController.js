@@ -4,9 +4,18 @@ app.controller('ListingsController', function($scope, $http) {
   $scope.listings = [];
   $scope.formError = "";
 
+  $scope.slides = [{image: '/img/glyph_detailed_house.png'}, {image: '/img/glyph_simple_house.jpg'}];
+
+
   controller.getAll = function() {
     $http.get('/api/listings').success(function(response) {
      $scope.listings = response.data.listings;
+    });
+  };
+
+  controller.getSelectedListing = function(id) {
+    $http.get('/api/listings/'+id).then(function(response) {
+       controller.selectedListings = response.data.data.listings[0];
     });
   };
 

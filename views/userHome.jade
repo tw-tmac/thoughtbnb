@@ -1,11 +1,10 @@
 div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
-  h1= user.name
-
+  h3 Tell us more about your place
   #newAddress.panel.panel-default.col-xs-12.col-sm-4
     .panel-body
       p(ng-cloak)#formError.text-danger {{formError}}
       .form-group
-        label(for="tagline") Tagline
+        label(for="tagline") Listing name
           input#tagline.form-control(ng-model="controller.newTagline")
       .form-group
         label(for="location") Location
@@ -24,7 +23,7 @@ div(ng-app="thoughtbnb", ng-controller="ListingsController as controller")
         label(for="features") Features
         .input-group
           input#quantity(ng-model="controller.newQuantity" size="2")
-          select(ng-model="controller.newType")
+          select(ng-model="controller.newType" ng-init="controller.newType='apartment'")
             option(value="apartment") Apartment
             option(value="bed/futon") Bed/Futon
             option(value="room") Room
