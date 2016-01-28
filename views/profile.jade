@@ -7,11 +7,11 @@ block content
         p(ng-cloak)#formError.text-danger {{formError}}
         .form-group
           label(for="tagline") Listing name
-            input#tagline.form-control(ng-model="controller.newTagline")
+          input#tagline.form-control(ng-model="controller.newTagline")
         .form-group
           label(for="location") Location
           p.helperText
-            span.helperText Which part of town do you living in?
+            span.helperText Which part of town do you live in?
           .input-group
             input#location.form-control(ng-model="controller.newLocation", placeholder="E.g. Fisherman's Wharf, San Francisco, CA")
             span.input-group-addon
@@ -22,9 +22,8 @@ block content
             span.helperText Give more details about your place
           textarea#description.form-control(placeholder="e.g. Close to BART station, futon or bed, etc", ng-model="controller.newDescription")
         .form-group
-          label(for="features") Features
+          label(for="features") What are you sharing?
           .input-group
-            input#quantity(ng-model="controller.newQuantity" size="2")
             select(ng-model="controller.newType" ng-init="controller.newType='apartment'")
               option(value="apartment") Apartment
               option(value="bed/futon") Bed/Futon
@@ -44,7 +43,7 @@ block content
           h3(ng-cloak) {{listing.tagline}}
           p(ng-cloak) {{listing.location}}
           p(ng-cloak) {{listing.description}}
-          p(ng-cloak) {{listing.quantity}} {{listing.type}}
+          p(ng-cloak) {{listing.type}}
           p
             i(ng-cloak) {{(listing.available) ? "" : "Not "}}Visible
           button(ng-click="controller.edit(listing._id)") edit

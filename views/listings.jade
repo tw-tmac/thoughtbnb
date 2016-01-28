@@ -14,14 +14,8 @@ block content
       div#placeholder(ng-show="results.length == 0")
         .listing.panel.panel-default.row
           .panel-body
-            span No listings in this city yet!
-        .listing.panel.panel-default.row
-          .panel-body
             span Tell your fellow thoughtworkers to list their place!  
-       div#placeholder(ng-show="results.length == 1")
-        .listing.panel.panel-default.row
-          .panel-body
-            span Tell your fellow thoughtworkers to list their place!
+       
      #details.listing.panel.panel-default.col-xs-6.col-lg-6(ng-show="showListing")
         .panel-body
           uib-carousel(no-wrap="noWrapSlides")
@@ -39,7 +33,7 @@ block content
               span {{controller.selectedListings.description}}
             p
               span(style="font-weight:bold") Sharing: 
-              span {{controller.selectedListings.quantity}} {{controller.selectedListings.type}}
+              span {{controller.selectedListings.type}}
             p
               span Contact 
                 a(ng-href="mailto:{{controller.selectedListings.user.email}}" ng-bind="controller.selectedListings.user.name")
