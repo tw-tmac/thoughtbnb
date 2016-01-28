@@ -6,6 +6,10 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'ThoughtBnB',  });
 });
 
+router.get('/profile', function(req, res, next) {
+  res.render('profile', { title: 'ThoughtBnB', activeLink: 'profile' });
+});
+
 router.get('/signin', function(req, res) {
   var locals = {
     title: "Sign In",
