@@ -7,7 +7,7 @@ block content
       h3 Where would you like to go?
       #btnSignin.btn.btn-primary.citiesBtn(ng-class="{'active':search.location === '{{city}}'}" ng-click="$parent.search.location = city; $parent.showListing=true; $parent.showDetails=false", ng-repeat="city in cities") {{city}}
       #btnSignin.btn.btn-primary(ng-click="search.location = '!!'; showListing=true") Anywhere!
-     #listings(ng-show="showListing").col-xs-12.col-sm-6.col-lg-4
+     #listings.panel.panel-default.col-xs-12.col-sm-4(ng-show="showListing" style="border: 0px")
       .listing.panel.panel-default.row(ng-repeat="listing in listings | filter:search as results" )
         .panel-body
           a(href="#")#listing(ng-cloak ng-click="controller.getSelectedListing(listing._id); $parent.showDetails=true") {{listing.tagline}}
@@ -16,7 +16,7 @@ block content
           .panel-body
             span Tell your fellow thoughtworkers to list their place!  
        
-     #details.listing.panel.panel-default.col-xs-6.col-lg-6(ng-show="showListing")
+     #details.listing.panel.panel-default.col-xs-12.col-sm-5(ng-show="showListing")
         .panel-body
           uib-carousel(no-wrap="noWrapSlides")
             uib-slide(ng-repeat="slide in slides" active="slide.active")
