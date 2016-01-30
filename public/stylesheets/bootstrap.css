@@ -5731,6 +5731,11 @@ button.list-group-item-danger.active:focus {
 .panel-default {
   border-color: #ddd;
 }
+
+.panel-default-no-border {
+  border-color: #fff;
+}
+
 .panel-default > .panel-heading {
   color: #333;
   background-color: #f5f5f5;
@@ -6798,3 +6803,23 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+
+#cities {
+  margin-bottom:5px;
+}
+
+.listing-label {
+  font-weight: bold
+}
+
+#listingDetails {
+  margin-top:5px
+}
+
+#gallery {
+  margin:auto;
+}
+
+#signup {
+  max-width: 500px;
+}
