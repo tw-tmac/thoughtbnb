@@ -1,0 +1,13 @@
+[
+  {
+    "_id" : 0,
+    "user" : 0,
+    "location" : "New york",
+    "description" : "Apartment in the upper west side, 15th floor with stunning view of Central Park. 2 blocks from strawberry fields",
+    "tagline" : "Beautiful apartment with view of Central park",
+    "type" : "bed/futon",
+    "quantity" : 1,
+    "available" : true,
+    "__v" : 0
+  }
+]

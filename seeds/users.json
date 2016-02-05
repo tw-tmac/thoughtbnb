@@ -1,0 +1,12 @@
+  [
+    {
+      "_id" : 0,
+      "email" : "testing@thoughtbnb.com",
+      "password" : "$2a$04$RFEuzOadAC52oZxk6sXM7eW7lF8WItBt66ubs7vA6rx3joShnskAO",
+      "name" : "John Smith",
+      "phone" : "123455",
+      "token" : "1e55fef01be5e616e3e571873dcea661",
+      "isActive" : true,
+      "__v" : 0
+    }
+  ]

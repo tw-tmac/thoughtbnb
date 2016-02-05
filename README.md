@@ -22,6 +22,9 @@ _It's exactly what you think it is._
 - [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 - [Vagrant](https://www.vagrantup.com/)
 
+##### Google maps javascript API
+This application uses google maps javascript API to insert locations. You will need to get your own API key. Follow the following [instructions](https://developers.google.com/maps/documentation/javascript/)
+
 ##### Start application
 ```
 vagrant plugin install vagrant-cachier
@@ -29,13 +32,17 @@ vagrant up
 vagrant ssh
 cd /vagrant
 npm install
-npm start
+GMAPKEY=<keyFromInstructionAbove> npm start
 ```
 Starts the website at http://192.168.33.15:3000
 
 In order to reload the app on changes, use `nodemon ./bin/www` instead of `npm start`
 
+If you're working in an area without an internet connection, use set the flag USE_LOCAL_ASSETS to true
+
 __Note:__ bcrypt is compiled specifically for your OS during npm install, so if you run `npm install` on OS X, then it will break in Ubuntu, and vice versa. To fix, remove node_modules/bcrypt and then do `npm install` again from the OS you wish to start the app from.
+
+
 
 #### Not Using Vagrant (Local Setup)
 ##### Dependencies
@@ -54,3 +61,5 @@ Start mongodb, then
 npm install
 npm start
 ```
+## Test data
+The database has been pre-populated. To login, use _testing@thoughtbnb.com_ and _test_ as password

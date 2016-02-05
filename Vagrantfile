@@ -15,6 +15,7 @@ Vagrant.configure(2) do |config|
     sudo apt-get update
     sudo apt-get install -y nodejs-legacy npm mongodb
     npm install -g grunt-cli mocha nodemon node-mongo-seeds
+    cd /vagrant
     seed
   SHELL
 end
