@@ -1,6 +1,6 @@
 # ThoughtBnB
 
-[![Build Status](https://snap-ci.com/asifrc/thoughtbnb/branch/master/build_image)](https://snap-ci.com/asifrc/thoughtbnb/branch/master)
+[![Build Status](https://travis-ci.org/tw-tmac/thoughtbnb.svg?branch=master)](https://travis-ci.org/tw-tmac/thoughtbnb)
 [![bitHound Score](https://www.bithound.io/github/asifrc/thoughtbnb/badges/score.svg)](https://www.bithound.io/github/asifrc/thoughtbnb)
 [![Code Climate](https://codeclimate.com/repos/561b2ad6e30ba01a30002dd5/badges/e2f86da635d055145f9f/gpa.svg)](https://codeclimate.com/repos/561b2ad6e30ba01a30002dd5/feed)
 [![Test Coverage](https://codeclimate.com/repos/561b2ad6e30ba01a30002dd5/badges/e2f86da635d055145f9f/coverage.svg)](https://codeclimate.com/repos/561b2ad6e30ba01a30002dd5/coverage)
