@@ -9,6 +9,8 @@ addons:
       - gcc-4.8
       - g++-4.8
 env:
-  - TRAVIS=travis CXX=g++-4.8      
+  - TRAVIS=travis CXX=g++-4.8
+before_script:
+  - npm install grunt-cli -g      
 install:
   - npm install
