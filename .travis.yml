@@ -8,7 +8,7 @@ addons:
     packages:
       - gcc-4.8
       - g++-4.8
-      - openjdk-8-jdk
+      - oracle-java8-set-default
 env:
   - TRAVIS=travis CXX=g++-4.8
 before_script:
