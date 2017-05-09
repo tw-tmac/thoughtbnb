@@ -9,7 +9,7 @@ module.exports = {
   },
   commands: [{
     checkIfPageHasBeenLoaded: function(browser) {
-      return this.waitForElementVisible('@citiesList', 3000)
+      return this.waitForElementVisible('@citiesList', 3000);
     }
   }]
 };
