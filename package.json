@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "pretest": "grunt jshint",
+    "stop": "killall node",
     "test": "node ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha test/integration/*"
   },
   "dependencies": {
@@ -23,7 +24,10 @@
     "nodemailer-mandrill-transport": "^0.3.0",
     "nodemailer": "^1.8.0",
     "nodemailer-smtp-transport": "^1.0.3",
-    "node-mongo-seeds": "^2.2.7"
+    "node-mongo-seeds": "^2.2.7",
+    "selenium-server": "^3.4.0",
+    "nightwatch": "^0.9.15",
+    "phantomjs-prebuilt": "^2.1.14"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

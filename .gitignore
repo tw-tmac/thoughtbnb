@@ -1,6 +1,9 @@
 node_modules
 .vagrant
-npm-debug.log
 **/.DS_Store
 coverage
 .env
+test/functional/screenshots
+reports/**
+*.log
+*.out
