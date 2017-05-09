@@ -22,4 +22,5 @@ install:
 services:
   - mongodb
 script:
-  - npm test && ./ft.sh
+  - npm test
+  - ./ft.sh
