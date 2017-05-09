@@ -1,5 +1,6 @@
 module.exports = {
   "src_folders": ["test/functional"],
+  "page_objects_path" : "test/functional/pages",
   "output_folder" : "reports",
   "selenium" : {
     "start_process" : true,
