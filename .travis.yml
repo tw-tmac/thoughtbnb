@@ -1,9 +1,4 @@
-language:
-  - node_js
-  - java
-jdk:
-  - oraclejdk8
-
+language: node_js
 node_js:
   - "4"
 addons:
@@ -13,6 +8,7 @@ addons:
     packages:
       - gcc-4.8
       - g++-4.8
+      - openjdk-8-jdk
 env:
   - TRAVIS=travis CXX=g++-4.8
 before_script:
