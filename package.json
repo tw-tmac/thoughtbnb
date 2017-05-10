@@ -27,7 +27,8 @@
     "node-mongo-seeds": "^2.2.7",
     "selenium-server": "^3.4.0",
     "nightwatch": "^0.9.15",
-    "phantomjs-prebuilt": "^2.1.14"
+    "phantomjs-prebuilt": "^2.1.14",
+    "chromedriver": "^2.29.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",

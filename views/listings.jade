@@ -7,8 +7,8 @@ block content
       h3 Where would you like to go?
       #btnCities.btn.btn-primary.citiesBtn(ng-class="{'active':search.location === '{{city}}'}" ng-click="$parent.search.location = city; $parent.showListing=true; $parent.showDetails=false", ng-repeat="city in cities") {{city}}
       #btnCities.btn.btn-primary(ng-click="search.location = '!!'; showListing=true") Anywhere!
-     #listings.panel.panel-default-no-border.col-xs-12.col-sm-5(ng-show="showListing")
-      .listing.panel.panel-default.row(ng-repeat="listing in listings | filter:search as results" )
+     .panel.panel-default-no-border.col-xs-12.col-sm-5(ng-show="showListing")
+      #citiesListings.listing.panel.panel-default.row(ng-repeat="listing in listings | filter:search as results" )
         .panel-body
           a(href="#")#listing(ng-cloak ng-click="controller.getSelectedListing(listing._id); $parent.showDetails=true") {{listing.tagline}}
       div#placeholder(ng-show="results.length == 0")

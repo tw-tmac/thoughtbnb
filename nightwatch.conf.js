@@ -10,7 +10,16 @@ module.exports = {
 
   "test_settings" : {
     "default" : {
-      "launch_url" : "http://localhost:3000",
+      "desiredCapabilities": {
+        "browserName": "chrome",
+        "javascriptEnabled": true,
+        "acceptSslCerts": true,
+        "phantomjs.binary.path" : "node_modules/phantomjs-prebuilt/lib/phantom/bin/phantomjs",
+      },
+      "cli_args" : {
+        "webdriver.chrome.driver" : "node_modules/chromedriver/lib/chromedriver/chromedriver"
+      },
+      "launch_url" : "http://192.168.33.15:3000",
       "selenium_port"  : 4444,
       "selenium_host"  : "localhost",
       "silent": true,
@@ -29,7 +38,7 @@ module.exports = {
       "screenshots" : {
         "enabled" : true,
         "on_failure" : true,
-        "on_error" : false,
+        "on_error" : true,
         "path" : "test/functional/screenshots"
       }
     }
