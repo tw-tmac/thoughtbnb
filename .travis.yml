@@ -2,14 +2,14 @@ language: node_js
 node_js:
   - "4"
 addons:
-  artifacts:
-    debug: true
-    paths:
-      - ./test/functional/screenshots
-    target_paths: $TRAVIS_BUILD_NUMBER
-    working_dir: WORKING_DIR
-    bucket: simplelance
-    s3_region: us-west-1
+  # artifacts:
+  #   debug: true
+  #   paths:
+  #     - ./test/functional/screenshots
+  #   target_paths: $TRAVIS_BUILD_NUMBER
+  #   working_dir: WORKING_DIR
+  #   bucket: simplelance
+  #   s3_region: us-west-1
   apt:
     sources:
       - ubuntu-toolchain-r-test
