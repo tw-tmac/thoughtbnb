@@ -7,10 +7,17 @@ var transports = {
   "direct": function() {
     return nodemailer.createTransport();
   },
+  "mailcatcher": function() {
+    var smtpTransport = require('nodemailer-smtp-transport');
+    return nodemailer.createTransport(smtpTransport({
+      host: "127.0.0.1",
+      port: 1025
+    }));
+  },
   "mailtrap": function() {
     var smtpTransport = require('nodemailer-smtp-transport');
     return nodemailer.createTransport(smtpTransport({
-      host: "mailtrap.io",
+      host: "smtp.mailtrap.io",
       port: CONFIG.MAILTRAP_PORT,
       auth: {
         user: CONFIG.MAILTRAP_USER,

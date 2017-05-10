@@ -13,9 +13,11 @@ Vagrant.configure(2) do |config|
 
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
-    sudo apt-get install -y nodejs-legacy npm mongodb openjdk-8-jdk
+    sudo apt-get install -y nodejs-legacy npm mongodb openjdk-8-jdkm ruby ruby-dev libsqlite3-dev
     npm install -g grunt-cli mocha nodemon node-mongo-seeds
     cd /vagrant
     seed
+    sudo gem install mailcatcher
+    mailcatcher
   SHELL
 end

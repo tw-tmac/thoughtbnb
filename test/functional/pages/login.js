@@ -9,7 +9,7 @@ module.exports = {
     passwordField: {
       selector: 'input[id=password]'
     },
-    submit: {
+    login: {
       selector: 'button[id=btnSignin]'
     }
   },
@@ -17,7 +17,7 @@ module.exports = {
     login: function(username, password) {
       return this.setValue('@usernameField', username)
                  .setValue('@passwordField', password)
-                 .click('@submit');
+                 .click('@login');
     }
   }]
 };

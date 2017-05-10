@@ -1,6 +1,4 @@
-#!/bin/bash
-set -ex
-GMAPKEY=AIzaSyDSgzVY0CYKRnx9cW0XDxDwMSAnWSumZmA nohup npm start &
+nohup node ./bin/www &
 sleep 5
 node_modules/.bin/nightwatch --env phantomjs
 npm stop

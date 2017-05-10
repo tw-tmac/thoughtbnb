@@ -32,7 +32,7 @@ vagrant up
 vagrant ssh
 cd /vagrant
 npm install
-GMAPKEY=<keyFromInstructionAbove> npm start
+GMAPKEY=<keyFromInstructionAbove> EMAIL_TRANSPORT=mailcatcher npm start
 ```
 Starts the website at http://192.168.33.15:3000
 
