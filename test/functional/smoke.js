@@ -11,8 +11,8 @@ module.exports = {
 
     login.navigate()
          .login('testing@thoughtbnb.com', 'test');
-    listing.checkIfPageHasBeenLoaded();
-    listing.clickAnywhereButton();
-    listing.checkIfNumbersOfListingIsEqualsTo(1);
+    listing.checkIfPageHasBeenLoaded()
+           .clickAnywhereButton()
+           .checkIfNumbersOfListingIsEqualsTo(1);
   }
 };
