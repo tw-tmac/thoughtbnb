@@ -9,6 +9,7 @@ addons:
       - "nohup.out"
       - "npm-debug.log"
       - "phantomjsdriver.log"
+      - "selenium-debug.log"
     target_paths: "$TRAVIS_BUILD_NUMBER"
     working_dir: WORKING_DIR
   apt:
