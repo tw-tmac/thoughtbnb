@@ -1,31 +1,31 @@
 language: node_js
 node_js:
-- '4'
+  - '4'
 addons:
   artifacts:
     debug: true
     paths:
-    - "./test/functional/screenshots"
-    - "*.log"
+      - "./test/functional/screenshots"
+      - "*.log"
     target_paths: "$TRAVIS_BUILD_NUMBER"
     working_dir: WORKING_DIR
   apt:
     sources:
-    - ubuntu-toolchain-r-test
+      - ubuntu-toolchain-r-test
     packages:
-    - gcc-4.8
-    - g++-4.8
-    - oracle-java8-set-default
+      - gcc-4.8
+      - g++-4.8
+      - oracle-java8-set-default
 env:
   matrix:
-  - TRAVIS=travis CXX=g++-4.8
+    - TRAVIS=travis CXX=g++-4.8
   before_script:
-- npm install grunt-cli -g
+    - npm install grunt-cli -g
 install:
-- npm install
+  - npm install
 services:
-- mongodb
+  - mongodb
 script:
-- seed
-- npm test
-- "./ft.sh"
+  - seed
+  - npm test
+  - "./ft.sh"
