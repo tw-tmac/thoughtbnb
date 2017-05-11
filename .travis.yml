@@ -6,7 +6,9 @@ addons:
     debug: true
     paths:
       - "./test/functional/screenshots"
-      - "*.log"
+      - "nohup.out"
+      - "npm-debug.log"
+      - "phantomjsdriver.log"
     target_paths: "$TRAVIS_BUILD_NUMBER"
     working_dir: WORKING_DIR
   apt:
@@ -19,8 +21,8 @@ addons:
 env:
   matrix:
     - TRAVIS=travis CXX=g++-4.8
-  before_script:
-    - npm install grunt-cli -g
+before_script:
+  - npm install grunt-cli -g
 install:
   - npm install
 services:
