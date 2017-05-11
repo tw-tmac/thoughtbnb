@@ -5,8 +5,8 @@ addons:
   artifacts:
     debug: true
     paths:
-    - ./test/functional/screenshots
-    - *.log
+    - "./test/functional/screenshots"
+    - "*.log"
     target_paths: "$TRAVIS_BUILD_NUMBER"
     working_dir: WORKING_DIR
   apt:
