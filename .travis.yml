@@ -17,7 +17,6 @@ addons:
     - g++-4.8
     - oracle-java8-set-default
 env:
-  matrix:
   - TRAVIS=travis CXX=g++-4.8
   - ARTIFACTS_BUCKET=travisci-thoughtbnb
   - secure: NOsqDVImWxBr4Cm1oqMf1sl5guJHj9mHyUcX6tYeOmeODlpycplqpi6Usu6eCgB423MUX5sc8bUCFsXhx6SSqeAA4SyIX622MfCYR66izQ3UxqK1A0v4m3c+g67ptRYJn1uvfcxtVKon/NRLNfvzujbzKtqCcAhlg+977YDQ9XsOLsHg30KZ1FVl7+ykBKPTSIBiBVxazXtVULQec7waYayFqAw7+g4fFIRO78Cxxqi3hHUzlTF9lXcvufrIpXAW9ZGdu2z+IVusVd4ED0AwFVNgOBz1ijICMJfP3K9kItrCfxUvsVps3CQI1qw2YaCaTUslQWHYXRT/zz7E7HDdcBq3iOb0Gnt4KYnrEdR8tFLAS1JjPLzoKrWdvCopyF6iQ52+4abd68PTvuRXSyrDZYkQl4GkjHrUG3a0fb2Tduq9OxLDf71hE9pwY8pKDw+iO0Uh/4/J//1+87jDc3I2rhn4T/eO7vlbw9g9rMEwFquuxlC+22tqwRbVlFIEyph9o/t426TQ3ZyleiRcYNGd8EBeuady31N5deA+79AzGUPBOcgGZTs8hUYV8UldLC586lKxBIbLWZ5lP3o9hXyioii2zNlnRei3k5PHP4jx6XdEN2+AYyHWjPXJugv1E7IwUMe6Bqk4X7I+RqypC0MsXu5DgMMvBUDxmgnmAMRcWYE=
