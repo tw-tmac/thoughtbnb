@@ -29,6 +29,11 @@ block content
               input#available(type="checkbox", ng-model="controller.newAvailable")
               | Visible
         .form-group
+          label(for="images") Upload some pictures of your place
+          img#gallery(ng-src="img/glyph_detailed_house.png")
+          input#uploadFiles(type="file" accept="image/*")
+          
+        .form-group
           button#btnAdd.btn.btn-primary(ng-click="controller.add()", ng-hide="controller.editing") Add
           button#btnEdit.btn.btn-primary(ng-click="controller.update()", ng-show="controller.editing") Update
           button#btnCancel.btn.btn-default(ng-click="controller.resetForm()", ng-show="controller.editing") Cancel

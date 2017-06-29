@@ -1,3 +1,19 @@
+(() => {
+  document.getElementById("uploadFiles").onchange = () => {
+    const files = document.getElementById('uploadFiles').files;
+    const file = files[0];
+    if(file == null){
+      return alert('No file selected.');
+    }
+    getSignedRequest(file);
+  };
+})();
+
+function getSignedRequest(file){
+  alert(`Uploading file ${file.name} of type ${file.type}`)
+}
+
+
 app.controller('ListingsController', function($scope, $http) {
   var controller = this;
 

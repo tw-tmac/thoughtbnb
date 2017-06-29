@@ -28,7 +28,9 @@
     "selenium-server": "^3.4.0",
     "nightwatch": "^0.9.15",
     "phantomjs-prebuilt": "^2.1.14",
-    "chromedriver": "^2.29.0"
+    "chromedriver": "^2.29.0",
+    "aws-sdk": "^2.50.0",
+    "aws-sdk-mock": "^1.7.0"
   },
   "devDependencies": {
     "grunt": "~0.4.5",
