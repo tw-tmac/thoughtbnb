@@ -42,7 +42,22 @@ If you're working in an area without an internet connection, use set the flag US
 
 __Note:__ bcrypt is compiled specifically for your OS during npm install, so if you run `npm install` on OS X, then it will break in Ubuntu, and vice versa. To fix, remove node_modules/bcrypt and then do `npm install` again from the OS you wish to start the app from.
 
+#### Using Docker
+##### Dependencies
+- [docker](https://store.docker.com/search?offering=community&type=edition)
+- [docker-compose](https://docs.docker.com/compose/install/)
 
+Build the docker image with `./build_docker.sh`
+
+Start the containers with `./start_app_docker.sh`
+
+You need to manually seed the DB with the following commands:
+
+```
+docker exec -it thoughtbnb_app_1 /bin/bash
+cd /opt/thoughtbnb
+seed
+```
 
 #### Not Using Vagrant (Local Setup)
 ##### Dependencies
