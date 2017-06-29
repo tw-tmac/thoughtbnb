@@ -1,5 +1,5 @@
 {
-	"undefined": "localhost/thoughtbnb",
+	"undefined": "mongo/thoughtbnb",
 	"dev": "localhost/thoughtbnb",
 	"prod": "localhost/thoughtbnb"
 }
