@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y unzip bzip2 build-essential python --no
 RUN cd /opt/ && \
     unzip thoughtbnb.zip -d /opt/thoughtbnb && \
     cd /opt/thoughtbnb && \
-    npm install && \
+    npm install --production && \
     npm install -g node-mongo-seeds
 
 EXPOSE 3000
