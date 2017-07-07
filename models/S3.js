@@ -1,14 +1,21 @@
 const aws = require('aws-sdk');
 require('aws-sdk');
+var CONFIG = require('../config');
 
-module.exports = function(filename){
+
+module.exports = function(userID, filename){
   var self = this;
-  const s3 = new aws.S3();
-
+  const s3 = new aws.S3({
+      accessKeyId: CONFIG.AWS_ACCESS_KEY_ID,
+      secretAccessKey: CONFIG.AWS_SECRET_ACCESS_KEY,
+      endpoint: CONFIG.AWS_S3_ENDPOINT,
+      sslEnabled: false,
+      s3ForcePathStyle: true,
+  });
   self.getS3SignedURL = function(callback) {
     var s3Params = {
-      Bucket: 'thoughtbnb',
-      Key: filename,
+      Bucket: CONFIG.S3_BUCKET,
+      Key: userID + '/'+filename,
       Expires: 60,
       ContentType: 'image/*',
       ACL: 'public-read'
@@ -18,9 +25,10 @@ module.exports = function(filename){
         console.log(err);
         return err;
       }
+
       const returnData = {
         signedRequest: data,
-        url: `https://thoughtbnb.s3.amazonaws.com/${filename}`
+        url: "http://" + CONFIG.AWS_S3_ENDPOINT +"/" + CONFIG.S3_BUCKET + "/" + userID + "/" + filename
       };
       return callback(JSON.stringify(returnData));
     });

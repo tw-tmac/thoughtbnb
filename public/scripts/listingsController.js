@@ -1,19 +1,3 @@
-// (() => {
-//   document.getElementById("uploadFiles").onchange = () => {
-//     const files = document.getElementById('uploadFiles').files;
-//     const file = files[0];
-//     if(file == null){
-//       return alert('No file selected.');
-//     }
-//     getSignedRequest(file);
-//   };
-// })();
-//
-// function getSignedRequest(file){
-//   alert(`Uploading file ${file.name} of type ${file.type}`)
-// }
-
-
 app.controller('ListingsController', function($scope, $http) {
   var controller = this;
 
@@ -105,7 +89,6 @@ app.controller('ListingsController', function($scope, $http) {
   controller.edit = function(id) {
     $http.get('/api/listings/'+id).then(function(response) {
       controller.currentListing = response.data.data.listings[0];
-      //asif = controller.currentListing;
       controller.currentListing.user = controller.currentListing.user._id;
       controller.newLocation = controller.currentListing.location;
       controller.newDescription = controller.currentListing.description;

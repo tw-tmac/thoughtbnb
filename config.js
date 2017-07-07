@@ -12,6 +12,10 @@ var CONFIG = {
   "USE_LOCAL_ASSETS": process.env.USE_LOCAL_ASSETS || false,
   "GMAPKEY": process.env.GMAPKEY || "getyourownkey",
   "salt": process.env.SALT || "a3jcLj3kaB",
+  "AWS_S3_ENDPOINT": process.env.AWS_S3_URL || "192.168.33.15",
+  "S3_BUCKET": process.env.S3_BUCKET || "thoughtbnb",
+  "AWS_ACCESS_KEY_ID": process.env.AWS_ACCESS_KEY_ID || "findyourawskey",
+  "AWS_SECRET_ACCESS_KEY": process.env.AWS_SECRET_ACCESS_KEY || "getyourownawssecret",
   "toggles": {
   }
 };

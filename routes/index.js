@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var S3 = require('../models/S3');
 const aws = require('aws-sdk');
-require('aws-sdk');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -38,8 +37,9 @@ router.get('/signup/confirmation', function(req, res) {
 });
 
 router.get('/s3Url', function(req, res) {
-  var s3 = new S3('blah.png');
+  var s3 = new S3(req.session.user._id, req.query['file-name']);
   s3.getS3SignedURL(function (returnData) {
+    console.log(returnData)
     res.write(returnData);
   });
   res.end();
