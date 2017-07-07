@@ -1,11 +1,11 @@
-const aws = require('aws-sdk');
+var aws = require('aws-sdk');
 require('aws-sdk');
 var CONFIG = require('../config');
 
 
 module.exports = function(userID, filename){
   var self = this;
-  const s3 = new aws.S3({
+  var s3 = new aws.S3({
       accessKeyId: CONFIG.AWS_ACCESS_KEY_ID,
       secretAccessKey: CONFIG.AWS_SECRET_ACCESS_KEY,
       endpoint: CONFIG.AWS_S3_ENDPOINT,
@@ -20,13 +20,13 @@ module.exports = function(userID, filename){
       ContentType: 'image/*',
       ACL: 'public-read'
     };
-    s3.getSignedUrl('putObject', s3Params, (err, data) => {
+    s3.getSignedUrl('putObject', s3Params, function(err, data) {
       if(err){
         console.log(err);
         return err;
       }
 
-      const returnData = {
+      var returnData = {
         signedRequest: data,
         url: "http://" + CONFIG.AWS_S3_ENDPOINT +"/" + CONFIG.S3_BUCKET + "/" + userID + "/" + filename
       };

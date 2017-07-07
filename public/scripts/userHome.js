@@ -7,24 +7,24 @@ $(function() {
   angular.element($('#location')).controller().initUserHome();
 });
 
-(() => {
-  document.getElementById("uploadFiles").onchange = () => {
-    const files = document.getElementById('uploadFiles').files;
-    const file = files[0];
-    if(file == null){
+$(function() {
+  document.getElementById("uploadFiles").onchange = function() {
+    var files = document.getElementById('uploadFiles').files;
+    var file = files[0];
+    if(file === null){
       return alert('No file selected.');
     }
     getSignedRequest(file);
   };
-})();
+});
 
 function getSignedRequest(file){
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET', `/s3Url?file-name=${file.name}&file-type=${file.type}`);
-  xhr.onreadystatechange = () => {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', "/s3Url?file-name=" +file.name+ "file-type=" +file.type);
+  xhr.onreadystatechange = function() {
     if(xhr.readyState === 4){
       if(xhr.status === 200){
-        const response = JSON.parse(xhr.responseText);
+        var response = JSON.parse(xhr.responseText);
         uploadFile(file, response.signedRequest, response.url);
       }
       else{
@@ -36,9 +36,9 @@ function getSignedRequest(file){
 }
 
 function uploadFile(file, signedRequest, url){
-  const xhr = new XMLHttpRequest();
+  var xhr = new XMLHttpRequest();
   xhr.open('PUT', signedRequest);
-  xhr.onreadystatechange = () => {
+  xhr.onreadystatechange = function() {
     if(xhr.readyState === 4){
       if(xhr.status === 200){
       }
