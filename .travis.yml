@@ -29,6 +29,6 @@ install:
 services:
   - mongodb
 script:
-  - seed
+  - NODE_ENV=dev seed
   - npm test
   - "./ft.sh"
