@@ -20,7 +20,7 @@ $(function() {
 
 function getSignedRequest(file){
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', "/s3Url?file-name=" +file.name+ "file-type=" +file.type);
+  xhr.open('GET', "/s3Url?file-name=" +file.name+ "&file-type=" +file.type);
   xhr.onreadystatechange = function() {
     if(xhr.readyState === 4){
       if(xhr.status === 200){

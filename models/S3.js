@@ -1,7 +1,7 @@
 var aws = require('aws-sdk');
-require('aws-sdk');
+var shortid = require('shortid');
 var CONFIG = require('../config');
-
+var sanitize = require("sanitize-filename");
 
 module.exports = function(userID, filename){
   var self = this;
@@ -15,7 +15,7 @@ module.exports = function(userID, filename){
   self.getS3SignedURL = function(callback) {
     var s3Params = {
       Bucket: CONFIG.S3_BUCKET,
-      Key: userID + '/'+filename,
+      Key: userID + '/'+ shortid.generate() + "-" + sanitize(filename),
       Expires: 60,
       ContentType: 'image/*',
       ACL: 'public-read'
